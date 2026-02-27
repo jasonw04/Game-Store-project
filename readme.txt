@@ -13,6 +13,7 @@ design choices
 
 colour palette
 -using a contrast of dark and light with the header to improve readability. product cards are a different colour to show importance
+-on view details and browse games page msotly white is used to contrast the pictures and thumbnails of the games to make them stand out more 
 
 inspiration
 -layout and styling was inspired by canadas computers 
