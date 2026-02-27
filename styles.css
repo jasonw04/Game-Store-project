@@ -1,0 +1,402 @@
+/* =========================
+   styles.css (electronics-store vibe)
+   - dark top ribbon + dark header
+   - wide search look
+   - horizontal nav
+   - hero banner look
+   - promo tiles row
+   - simple desktop responsiveness
+   ========================= */
+
+/* Base */
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f3f4f6;
+  color: #111;
+}
+
+/* Header layout */
+#site_header {
+  background: #0b0f14;
+  color: #fff;
+  border-bottom: 3px solid #1f2a37;
+}
+
+/* Put title + nav on one line */
+#site_header {
+  display: flex;
+  justify-content: space-between;  /* pushes nav to the right */
+  align-items: center;
+  padding: 10px 16px;
+}
+
+/* Remove extra margin from title */
+#site_title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Align nav list to the right */
+#main_nav {
+  margin: 0;
+}
+
+/* Make nav horizontal */
+#nav_list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;            /* makes it horizontal */
+  justify-content: flex-end; /* pushes items to right */
+  align-items: center;
+}
+
+#nav_list li {
+  margin-left: 12px;  /* spacing between links */
+}
+
+#nav_list li a {
+  text-decoration: none;
+  color: #e5e7eb;
+  padding: 8px 10px;
+  border-radius: 4px;
+}
+
+#nav_list li a:hover {
+  background: rgba(255,255,255,0.10);
+}
+
+/* Main wrapper */
+#main_content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+/* Pages */
+.page {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.hidden { display: none; }
+
+h2 { margin: 0 0 10px 0; font-size: 20px; }
+h3 { margin: 12px 0 10px 0; font-size: 16px; }
+
+/* Buttons */
+button {
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #f1f5f9;
+}
+
+/* =========================
+   HOME HERO / CAROUSEL
+   ========================= */
+#hero_carousel {
+  background: #0b0f14;
+  color: #fff;
+  border: 1px solid #1f2a37;
+  border-radius: 12px;
+  padding: 14px;
+  overflow: hidden;
+}
+
+/* Make it feel like a banner */
+#carousel_viewport {
+  border-radius: 12px;
+  padding: 16px;
+  background:
+    linear-gradient(90deg, rgba(0,0,0,0.85), rgba(0,0,0,0.25)),
+    radial-gradient(circle at 25% 20%, rgba(255,255,255,0.08), transparent 60%);
+  border: 1px solid rgba(255,255,255,0.10);
+}
+
+#carousel_slide h4 {
+  margin: 0 0 8px 0;
+  font-size: 28px;
+  letter-spacing: 0.5px;
+}
+
+#carousel_slide p {
+  margin: 6px 0;
+  color: #e5e7eb;
+  max-width: 700px;
+}
+
+#carousel_game_img {
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  margin-top: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+/* Carousel buttons */
+#hero_carousel button {
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+}
+
+#hero_carousel button:hover {
+  background: rgba(255,255,255,0.14);
+}
+
+/* =========================
+   RECOMMENDED "TILES" ROW
+   (looks like promo cards under hero)
+   ========================= */
+/* Recommended section */
+/* Recommended section container */
+#recommended_section {
+  margin-top: 30px;
+}
+
+#recommended_section h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Horizontal scroll layout */
+#recommended_list {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;       /* allows horizontal scrolling */
+  padding-bottom: 10px;
+}
+
+/* Hide ugly scrollbar on WebKit browsers */
+#recommended_list::-webkit-scrollbar {
+  height: 8px;
+}
+
+#recommended_list::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+/* Card styling */
+#recommended_list .game_card {
+  min-width: 260px;       /* fixed width cards */
+  flex-shrink: 0;         /* prevents shrinking */
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  padding: 16px;
+  background: #1f2937;
+  color: #ffffff;
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+#recommended_list .game_card:hover {
+  transform: translateY(-4px);
+}
+
+#recommended_list .game_card h4 {
+  margin-bottom: 10px;
+}
+
+#recommended_list .game_card button {
+  margin-top: 10px;
+}
+
+/* =========================
+   GAMES CONTROLS (filters area)
+   ========================= */
+#games_controls {
+  background: #0f172a;
+  color: #e5e7eb;
+  border: 1px solid #1f2a37;
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 14px;
+}
+
+/* Make all filter inputs and selects same width */
+#games_controls input,
+#games_controls select {
+  width: 280px;      /* same width for everything */
+  max-width: 100%;
+  padding: 8px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  box-sizing: border-box; /* ensures padding doesn't change width */
+}
+
+#games_controls label {
+  font-size: 13px;
+  color: #cbd5e1;
+}
+
+input, select {
+  width: 280px;
+  max-width: 100%;
+  padding: 8px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  margin-top: 6px;
+}
+
+#games_controls button {
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.10);
+  color: #fff;
+}
+
+#games_controls button:hover {
+  background: rgba(255,255,255,0.16);
+}
+
+/* =========================
+   GAME CARDS
+   ========================= */
+
+.game_card {
+  border: 1px solid #dddddd;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 12px;
+  background-color: #ffffff;
+}
+
+.game_card h4 {
+  margin: 0 0 6px 0;
+  font-size: 16px;
+}
+
+.game_card p {
+  margin: 4px 0;
+}
+
+/* Grid view (cards side-by-side) */
+#games_list.grid_view .game_card {
+  display: inline-block;
+  width: 240px;
+  vertical-align: top;
+  margin-right: 12px;
+}
+
+/* List view (full width stacked) */
+#games_list.list_view .game_card {
+  display: block;
+  width: auto;
+  margin-right: 0;
+}
+
+/* Buttons: original basic style (no forced full width) */
+.game_card button {
+  width: auto;
+  margin-top: 6px;
+  margin-right: 6px;
+  padding: 8px 10px;
+  border-radius: 6px;
+}
+/* =========================
+   TABLES
+   ========================= */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  background: #ffffff;
+}
+
+th, td {
+  border: 1px solid #e5e7eb;
+  padding: 10px;
+  text-align: left;
+}
+
+thead th { background: #f1f5f9; }
+
+tbody tr:nth-child(even) { background: #f8fafc; }
+tbody tr:hover { background: #eef2ff; }
+
+/* =========================
+   Error text
+   ========================= */
+.error_text {
+  display: inline-block;
+  margin-left: 8px;
+  font-size: 12px;
+  color: #b91c1c;
+}
+
+/* Thumbnails/screenshots */
+#thumbnail_list, #screenshot_list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+#thumbnail_list li, #screenshot_list li {
+  display: inline-block;
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+.thumb_img, .shot_img {
+  width: 120px;
+  height: auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+}
+
+/* Footer */
+#site_footer {
+  background: #0b0f14;
+  color: #e5e7eb;
+  padding: 16px;
+  border-top: 3px solid #1f2a37;
+}
+
+#site_footer input {
+  border: 1px solid #334155;
+}
+
+#site_footer fieldset {
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 10px;
+  padding: 12px;
+}
+
+#footer_text {
+  margin-top: 12px;
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+/* =========================
+   Desktop responsiveness
+   ========================= */
+@media screen and (max-width: 980px) {
+  #recommended_list .game_card {
+    width: 48%;
+    margin-right: 4%;
+  }
+  #recommended_list .game_card:nth-child(2n) { margin-right: 0; }
+  #recommended_list .game_card:nth-child(3n) { margin-right: 4%; }
+}
+
+@media screen and (max-width: 650px) {
+  #nav_list li { display: block; margin: 6px 0; }
+  #recommended_list .game_card { width: 100%; margin-right: 0; }
+  #games_list.grid_view .game_card { width: 100%; margin-right: 0; }
+}
