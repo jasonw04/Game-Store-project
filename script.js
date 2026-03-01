@@ -178,6 +178,8 @@ function showCarousel() {
   byId("carousel_game_desc").innerHTML =
     "Price: $" + fmt(g.price) + " | Rating: " + g.rating + " | " +
     g.category.toUpperCase() + " / " + g.platform.toUpperCase();
+
+  byId("carousel_game_img").src = g.image;
 }
 
 /* ---------- recommended cards ---------- */
@@ -620,8 +622,33 @@ function checkoutValid() {
     if (ok) clearErr("err_pay_card");
   }
 
-  if (exp.length !== 5 || exp[2] !== "/") { setErr("err_pay_exp", "Use MM/YY."); ok = false; }
-  else clearErr("err_pay_exp");
+  if (exp.length !== 5 || exp[2] !== "/") {
+    setErr("err_pay_exp", "Use MM/YY.");
+    ok = false;
+  } else {
+    const month = parseInt(exp.substring(0, 2));
+    const year = parseInt(exp.substring(3, 5));
+
+    if (isNaN(month) || month < 1 || month > 12) {
+      setErr("err_pay_exp", "Invalid month.");
+      ok = false;
+    } else if (isNaN(year)) {
+      setErr("err_pay_exp", "Invalid year.");
+      ok = false;
+    } else {
+      // Check if expiry is in the past
+      const now = new Date();
+      const currentMonth = now.getMonth() + 1; // 0-based
+      const currentYear = now.getFullYear() % 100; // last 2 digits
+
+      if (year < currentYear || (year === currentYear && month < currentMonth)) {
+        setErr("err_pay_exp", "Card has expired.");
+        ok = false;
+      } else {
+        clearErr("err_pay_exp");
+      }
+    }
+  }
 
   if (!(cvv.length === 3 || cvv.length === 4)) { setErr("err_pay_cvv", "3 or 4 digits."); ok = false; }
   else clearErr("err_pay_cvv");
@@ -814,11 +841,11 @@ function setup() {
   renderWishlist();
   renderCart();
   startCarouselAuto();
-}
 
-document.getElementById("filter_form").addEventListener("submit", function(event) {
+  document.getElementById("filter_form").addEventListener("submit", function(event) {
   event.preventDefault();
   renderGames();
 });
+}
 
 document.addEventListener("DOMContentLoaded", setup);
