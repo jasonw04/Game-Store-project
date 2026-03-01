@@ -21,6 +21,7 @@ let cart = [];     // [{id, qty}]
 let wishlist = []; // [id]
 let viewMode = "grid";
 let carouselIndex = 0;
+let carouselTimer = null;
 let detailId = null;
 
 function byId(id) {
@@ -577,16 +578,37 @@ function setup() {
   byId("nav_checkout").addEventListener("click", function (e) { e.preventDefault(); show("page_checkout"); });
 
   // carousel
-  byId("btn_carousel_prev").addEventListener("click", function () {
-    carouselIndex--;
-    if (carouselIndex < 0) carouselIndex = recommended.length - 1;
+  function nextSlide() {
+    carouselIndex++;
+    if (carouselIndex >= recommended.length) {
+      carouselIndex = 0;
+    }
     showCarousel();
+  }
+
+  function prevSlide() {
+    carouselIndex--;
+    if (carouselIndex < 0) {
+      carouselIndex = recommended.length - 1;
+    }
+    showCarousel();
+  }
+
+  function startCarouselAuto() {
+    if (carouselTimer) clearInterval(carouselTimer);
+    carouselTimer = setInterval(function () {
+      nextSlide();
+    }, 4000);
+  }
+
+  byId("btn_carousel_prev").addEventListener("click", function () {
+    prevSlide();
+    startCarouselAuto(); // reset timer
   });
 
   byId("btn_carousel_next").addEventListener("click", function () {
-    carouselIndex++;
-    if (carouselIndex >= recommended.length) carouselIndex = 0;
-    showCarousel();
+    nextSlide();
+    startCarouselAuto(); // reset timer
   });
 
   byId("btn_carousel_view_details").addEventListener("click", function () {
@@ -667,6 +689,7 @@ function setup() {
   renderRecommended();
   renderWishlist();
   renderCart();
+  startCarouselAuto();
 }
 
 document.getElementById("filter_form").addEventListener("submit", function(event) {
