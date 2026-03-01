@@ -575,7 +575,6 @@ function setup() {
   byId("nav_about").addEventListener("click", function (e) { e.preventDefault(); show("page_about"); });
   byId("nav_wishlist").addEventListener("click", function (e) { e.preventDefault(); show("page_wishlist"); renderWishlist(); });
   byId("nav_cart").addEventListener("click", function (e) { e.preventDefault(); show("page_cart"); renderCart(); });
-  byId("nav_checkout").addEventListener("click", function (e) { e.preventDefault(); show("page_checkout"); });
 
   // carousel
   function nextSlide() {
