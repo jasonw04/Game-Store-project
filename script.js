@@ -9,6 +9,12 @@ const games = [
       "https://picsum.photos/seed/action-thumb-1a/200/120",
       "https://picsum.photos/seed/action-thumb-1b/200/120",
       "https://picsum.photos/seed/action-thumb-1c/200/120"
+    ],
+   screenshots: [
+      "https://picsum.photos/seed/action-shot-1a/800/450",
+      "https://picsum.photos/seed/action-shot-1b/800/450",
+      "https://picsum.photos/seed/action-shot-1c/800/450",
+      "https://picsum.photos/seed/action-shot-1d/800/450"
     ]
   },
   {id: 2, name: "Dungeon Quest", category: "rpg", platform: "ps5", price: 69.99, rating: 4.8, release: "2024-11-20", image: "https://picsum.photos/seed/rpg-main-2/800/450",
@@ -16,6 +22,12 @@ const games = [
       "https://picsum.photos/seed/rpg-thumb-2a/200/120",
       "https://picsum.photos/seed/rpg-thumb-2b/200/120",
       "https://picsum.photos/seed/rpg-thumb-2c/200/120"
+    ],
+   screenshots: [
+      "https://picsum.photos/seed/rpg-shot-2a/800/450",
+      "https://picsum.photos/seed/rpg-shot-2b/800/450",
+      "https://picsum.photos/seed/rpg-shot-2c/800/450",
+      "https://picsum.photos/seed/rpg-shot-2d/800/450"
     ]
   },
   {id: 3, name: "Street Hoops", category: "sports", platform: "xbox", price: 39.99, rating: 4.1, release: "2023-06-01", image: "https://picsum.photos/seed/sports-main-3/800/450",
@@ -23,6 +35,12 @@ const games = [
       "https://picsum.photos/seed/sports-thumb-3a/200/120",
       "https://picsum.photos/seed/sports-thumb-3b/200/120",
       "https://picsum.photos/seed/sports-thumb-3c/200/120"
+    ],
+   screenshots: [
+      "https://picsum.photos/seed/sports-shot-3a/800/450",
+      "https://picsum.photos/seed/sports-shot-3b/800/450",
+      "https://picsum.photos/seed/sports-shot-3c/800/450",
+      "https://picsum.photos/seed/sports-shot-3d/800/450"
     ]
   },
   {id: 4, name: "Galaxy Tactics", category: "strategy", platform: "pc", price: 29.99, rating: 4.3, release: "2022-03-15", image: "https://picsum.photos/seed/strategy-main-4/800/450",
@@ -30,6 +48,12 @@ const games = [
       "https://picsum.photos/seed/strategy-thumb-4a/200/120",
       "https://picsum.photos/seed/strategy-thumb-4b/200/120",
       "https://picsum.photos/seed/strategy-thumb-4c/200/120"
+    ],
+   screenshots: [
+      "https://picsum.photos/seed/strategy-shot-4a/800/450",
+      "https://picsum.photos/seed/strategy-shot-4b/800/450",
+      "https://picsum.photos/seed/strategy-shot-4c/800/450",
+      "https://picsum.photos/seed/strategy-shot-4d/800/450"
     ]
   },
   {id: 5, name: "Neon Runner", category: "action", platform: "switch", price: 19.99, rating: 4.0, release: "2021-08-10", image: "https://picsum.photos/seed/action-main-5/800/450",
@@ -37,6 +61,12 @@ const games = [
       "https://picsum.photos/seed/action-thumb-5a/200/120",
       "https://picsum.photos/seed/action-thumb-5b/200/120",
       "https://picsum.photos/seed/action-thumb-5c/200/120"
+    ],
+   screenshots: [
+      "https://picsum.photos/seed/action-shot-5a/800/450",
+      "https://picsum.photos/seed/action-shot-5b/800/450",
+      "https://picsum.photos/seed/action-shot-5c/800/450",
+      "https://picsum.photos/seed/action-shot-5d/800/450"
     ]
   },
   {id: 6, name: "Kingdom Stories", category: "rpg", platform: "pc", price: 59.99, rating: 4.7, release: "2025-01-30", image: "https://picsum.photos/seed/rpg-main-6/800/450",
@@ -44,6 +74,12 @@ const games = [
       "https://picsum.photos/seed/rpg-thumb-6a/200/120",
       "https://picsum.photos/seed/rpg-thumb-6b/200/120",
       "https://picsum.photos/seed/rpg-thumb-6c/200/120"
+    ],
+   screenshots: [
+      "https://picsum.photos/seed/rpg-shot-6a/800/450",
+      "https://picsum.photos/seed/rpg-shot-6b/800/450",
+      "https://picsum.photos/seed/rpg-shot-6c/800/450",
+      "https://picsum.photos/seed/rpg-shot-6d/800/450"
     ]
   },
   {id: 7, name: "Pro League Soccer", category: "sports", platform: "ps5", price: 79.99, rating: 4.2, release: "2024-09-05", image: "https://picsum.photos/seed/sports-main-7/800/450",
@@ -51,6 +87,12 @@ const games = [
       "https://picsum.photos/seed/sports-thumb-7a/200/120",
       "https://picsum.photos/seed/sports-thumb-7b/200/120",
       "https://picsum.photos/seed/sports-thumb-7c/200/120"
+    ],
+   screenshots: [
+      "https://picsum.photos/seed/sports-shot-7a/800/450",
+      "https://picsum.photos/seed/sports-shot-7b/800/450",
+      "https://picsum.photos/seed/sports-shot-7c/800/450",
+      "https://picsum.photos/seed/sports-shot-7d/800/450"
     ]
   },
   {id: 8, name: "Island Empire", category: "strategy", platform: "switch", price: 24.99, rating: 4.4, release: "2023-12-18", image: "https://picsum.photos/seed/strategy-main-8/800/450",
@@ -58,6 +100,12 @@ const games = [
       "https://picsum.photos/seed/strategy-thumb-8a/200/120",
       "https://picsum.photos/seed/strategy-thumb-8b/200/120",
       "https://picsum.photos/seed/strategy-thumb-8c/200/120"
+    ],
+   screenshots: [
+      "https://picsum.photos/seed/strategy-shot-8a/800/450",
+      "https://picsum.photos/seed/strategy-shot-8b/800/450",
+      "https://picsum.photos/seed/strategy-shot-8c/800/450",
+      "https://picsum.photos/seed/strategy-shot-8d/800/450"
     ]
   }
 ];
@@ -269,8 +317,10 @@ function renderGames() {
 /* ---------- detail ---------- */
 function openDetail(id) {
   const g = findGame(id);
-  const thumbContainer = byId("detail_thumbnails");
-  thumbContainer.innerHTML = "";
+  const thumbList = byId("thumbnail_list");
+  thumbList.innerHTML = "";
+  const shotList = byId("screenshot_list");
+  shotList.innerHTML = "";
   if (!g) return;
   detailId = id;
 
@@ -283,12 +333,29 @@ function openDetail(id) {
   byId("spec_rating").innerHTML = String(g.rating);
 
   g.thumbnails.forEach(function (imgUrl) {
+    const li = document.createElement("li");
     const img = document.createElement("img");
+
     img.src = imgUrl;
+    img.className = "thumb_img";
+
     img.addEventListener("click", function () {
       byId("detail_main_img").src = imgUrl;
     });
-    thumbContainer.appendChild(img);
+
+    li.appendChild(img);
+    thumbList.appendChild(li);
+  });
+
+  g.screenshots.forEach(function (imgUrl) {
+    const li = document.createElement("li");
+    const img = document.createElement("img");
+
+    img.src = imgUrl;
+    img.className = "shot_img";
+
+    li.appendChild(img);
+    shotList.appendChild(li);
   });
   
   show("page_detail");
@@ -751,7 +818,7 @@ function setup() {
 
 document.getElementById("filter_form").addEventListener("submit", function(event) {
   event.preventDefault();
-  runSearch();  // call your existing search function
+  renderGames();
 });
 
 document.addEventListener("DOMContentLoaded", setup);
