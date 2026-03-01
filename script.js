@@ -4,14 +4,62 @@ const TAX = 0.13;
 
 // 8 games
 const games = [
-  { id: 1, name: "Sky Battle", category: "action", platform: "pc", price: 49.99, rating: 4.6, release: "2025-09-12" },
-  { id: 2, name: "Dungeon Quest", category: "rpg", platform: "ps5", price: 69.99, rating: 4.8, release: "2024-11-20" },
-  { id: 3, name: "Street Hoops", category: "sports", platform: "xbox", price: 39.99, rating: 4.1, release: "2023-06-01" },
-  { id: 4, name: "Galaxy Tactics", category: "strategy", platform: "pc", price: 29.99, rating: 4.3, release: "2022-03-15" },
-  { id: 5, name: "Neon Runner", category: "action", platform: "switch", price: 19.99, rating: 4.0, release: "2021-08-10" },
-  { id: 6, name: "Kingdom Stories", category: "rpg", platform: "pc", price: 59.99, rating: 4.7, release: "2025-01-30" },
-  { id: 7, name: "Pro League Soccer", category: "sports", platform: "ps5", price: 79.99, rating: 4.2, release: "2024-09-05" },
-  { id: 8, name: "Island Empire", category: "strategy", platform: "switch", price: 24.99, rating: 4.4, release: "2023-12-18" }
+  {id: 1, name: "Sky Battle", category: "action", platform: "pc", price: 49.99, rating: 4.6, release: "2025-09-12", image: "https://picsum.photos/seed/action-main-1/800/450",
+   thumbnails: [
+      "https://picsum.photos/seed/action-thumb-1a/200/120",
+      "https://picsum.photos/seed/action-thumb-1b/200/120",
+      "https://picsum.photos/seed/action-thumb-1c/200/120"
+    ]
+  },
+  {id: 2, name: "Dungeon Quest", category: "rpg", platform: "ps5", price: 69.99, rating: 4.8, release: "2024-11-20", image: "https://picsum.photos/seed/rpg-main-2/800/450",
+   thumbnails: [
+      "https://picsum.photos/seed/rpg-thumb-2a/200/120",
+      "https://picsum.photos/seed/rpg-thumb-2b/200/120",
+      "https://picsum.photos/seed/rpg-thumb-2c/200/120"
+    ]
+  },
+  {id: 3, name: "Street Hoops", category: "sports", platform: "xbox", price: 39.99, rating: 4.1, release: "2023-06-01", image: "https://picsum.photos/seed/sports-main-3/800/450",
+   thumbnails: [
+      "https://picsum.photos/seed/sports-thumb-3a/200/120",
+      "https://picsum.photos/seed/sports-thumb-3b/200/120",
+      "https://picsum.photos/seed/sports-thumb-3c/200/120"
+    ]
+  },
+  {id: 4, name: "Galaxy Tactics", category: "strategy", platform: "pc", price: 29.99, rating: 4.3, release: "2022-03-15", image: "https://picsum.photos/seed/strategy-main-4/800/450",
+   thumbnails: [
+      "https://picsum.photos/seed/strategy-thumb-4a/200/120",
+      "https://picsum.photos/seed/strategy-thumb-4b/200/120",
+      "https://picsum.photos/seed/strategy-thumb-4c/200/120"
+    ]
+  },
+  {id: 5, name: "Neon Runner", category: "action", platform: "switch", price: 19.99, rating: 4.0, release: "2021-08-10", image: "https://picsum.photos/seed/action-main-5/800/450",
+   thumbnails: [
+      "https://picsum.photos/seed/action-thumb-5a/200/120",
+      "https://picsum.photos/seed/action-thumb-5b/200/120",
+      "https://picsum.photos/seed/action-thumb-5c/200/120"
+    ]
+  },
+  {id: 6, name: "Kingdom Stories", category: "rpg", platform: "pc", price: 59.99, rating: 4.7, release: "2025-01-30", image: "https://picsum.photos/seed/rpg-main-6/800/450",
+   thumbnails: [
+      "https://picsum.photos/seed/rpg-thumb-6a/200/120",
+      "https://picsum.photos/seed/rpg-thumb-6b/200/120",
+      "https://picsum.photos/seed/rpg-thumb-6c/200/120"
+    ]
+  },
+  {id: 7, name: "Pro League Soccer", category: "sports", platform: "ps5", price: 79.99, rating: 4.2, release: "2024-09-05", image: "https://picsum.photos/seed/sports-main-7/800/450",
+   thumbnails: [
+      "https://picsum.photos/seed/sports-thumb-7a/200/120",
+      "https://picsum.photos/seed/sports-thumb-7b/200/120",
+      "https://picsum.photos/seed/sports-thumb-7c/200/120"
+    ]
+  },
+  {id: 8, name: "Island Empire", category: "strategy", platform: "switch", price: 24.99, rating: 4.4, release: "2023-12-18", image: "https://picsum.photos/seed/strategy-main-8/800/450",
+   thumbnails: [
+      "https://picsum.photos/seed/strategy-thumb-8a/200/120",
+      "https://picsum.photos/seed/strategy-thumb-8b/200/120",
+      "https://picsum.photos/seed/strategy-thumb-8c/200/120"
+    ]
+  }
 ];
 
 // 4 recommended
@@ -221,18 +269,28 @@ function renderGames() {
 /* ---------- detail ---------- */
 function openDetail(id) {
   const g = findGame(id);
+  const thumbContainer = byId("detail_thumbnails");
+  thumbContainer.innerHTML = "";
   if (!g) return;
-
   detailId = id;
 
   byId("detail_title").innerHTML = g.name;
   byId("detail_description").innerHTML = "Price: $" + fmt(g.price) + " | Rating: " + g.rating;
-
+  byId("detail_main_img").src = g.image;
   byId("spec_type").innerHTML = g.category.toUpperCase();
   byId("spec_platform").innerHTML = g.platform.toUpperCase();
   byId("spec_release").innerHTML = g.release;
   byId("spec_rating").innerHTML = String(g.rating);
 
+  g.thumbnails.forEach(function (imgUrl) {
+    const img = document.createElement("img");
+    img.src = imgUrl;
+    img.addEventListener("click", function () {
+      byId("detail_main_img").src = imgUrl;
+    });
+    thumbContainer.appendChild(img);
+  });
+  
   show("page_detail");
 }
 
