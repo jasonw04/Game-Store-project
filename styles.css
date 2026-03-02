@@ -478,24 +478,6 @@ tbody tr:hover { background: #eef2ff; }
   color: #9ca3af;
 }
 
-/* responsive */
-@media screen and (max-width: 1120px) {
-  #games_list.grid_view { grid-template-columns: repeat(3, minmax(220px, 1fr)); }
-  #carousel_slide { grid-template-columns: 1fr; }
-  #carousel_game_img { max-width: 680px; }
-}
-
-@media screen and (max-width: 860px) {
-  #games_list.grid_view { grid-template-columns: repeat(2, minmax(220px, 1fr)); }
-  #games_list.list_view .game_card { grid-template-columns: 1fr; }
-  #games_list.list_view .card_img { height: 160px; }
-}
-
-@media screen and (max-width: 650px) {
-  #nav_list { flex-wrap: wrap; }
-  #games_list.grid_view { grid-template-columns: 1fr; }
-}
-
 /* print */
 @media print {
   #site_header,
