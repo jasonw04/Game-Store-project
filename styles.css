@@ -1,384 +1,520 @@
-/* =========================
-   styles.css (electronics-store vibe)
-   - dark top ribbon + dark header
-   - wide search look
-   - horizontal nav
-   - hero banner look
-   - promo tiles row
-   - simple desktop responsiveness
-   ========================= */
-
-/* Base */
 html, body { height: 100%; }
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
-  padding: 0;
   font-family: Arial, Helvetica, sans-serif;
   background: #f3f4f6;
-  color: #111;
+  color: #111827;
+  line-height: 1.35;
 }
 
-/* Header layout */
+/* header */
 #site_header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
   background: #0b0f14;
   color: #fff;
-  border-bottom: 3px solid #1f2a37;
-}
-
-/* Put title + nav on one line */
-#site_header {
+  border-bottom: 1px solid rgba(255,255,255,0.10);
   display: flex;
-  justify-content: space-between;  /* pushes nav to the right */
+  justify-content: space-between;
   align-items: center;
   padding: 10px 16px;
 }
 
-/* Remove extra margin from title */
 #site_title {
   margin: 0;
   font-size: 18px;
-  font-weight: bold;
+  font-weight: 800;
+  letter-spacing: 0.3px;
 }
 
-/* Align nav list to the right */
-#main_nav {
-  margin: 0;
-}
+/* nav */
+#main_nav { margin: 0; }
 
-/* Make nav horizontal */
 #nav_list {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;            /* makes it horizontal */
-  justify-content: flex-end; /* pushes items to right */
+  display: flex;
+  gap: 6px;
   align-items: center;
 }
 
-#nav_list li {
-  margin-left: 12px;  /* spacing between links */
-}
+#nav_list li { margin: 0; }
 
 #nav_list li a {
   text-decoration: none;
   color: #e5e7eb;
   padding: 8px 10px;
-  border-radius: 4px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
 #nav_list li a:hover {
   background: rgba(255,255,255,0.10);
+  color: #fff;
 }
 
-/* Main wrapper */
+/* badges */
+#wishlist_count, #cart_count {
+  display: inline-block;
+  min-width: 22px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 12px;
+  line-height: 18px;
+  background: rgba(59,130,246,0.20);
+  border: 1px solid rgba(59,130,246,0.30);
+}
+
+/* layout */
 #main_content {
   max-width: 1200px;
   margin: 0 auto;
   padding: 16px;
 }
 
-/* Pages */
+/* pages */
 .page {
-  background: #ffffff;
+  background: #fff;
   border: 1px solid #e5e7eb;
-  border-radius: 10px;
-  padding: 16px;
-  margin-bottom: 16px;
+  border-radius: 14px;
+  padding: 18px;
+  margin: 16px 0;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.07);
 }
 
 .hidden { display: none; }
 
-h2 { margin: 0 0 10px 0; font-size: 20px; }
-h3 { margin: 12px 0 10px 0; font-size: 16px; }
+h2 {
+  margin: 0 0 12px 0;
+  font-size: 22px;
+  font-weight: 900;
+}
 
-/* Buttons */
+h3 {
+  margin: 14px 0 10px 0;
+  font-size: 15px;
+  font-weight: 900;
+}
+
+/* form */
+input, select {
+  width: 280px;
+  max-width: 100%;
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  margin-top: 6px;
+  outline: none;
+  background: #fff;
+}
+
+input:focus, select:focus {
+  border-color: rgba(59,130,246,0.65);
+  box-shadow: 0 0 0 4px rgba(59,130,246,0.12);
+}
+
+/* buttons */
 button {
   border: 1px solid #cbd5e1;
-  background: #ffffff;
-  padding: 8px 10px;
-  border-radius: 6px;
+  background: #fff;
+  padding: 9px 12px;
+  border-radius: 10px;
   cursor: pointer;
+  font-weight: 800;
+  color: #0f172a;
 }
 
-button:hover {
-  background: #f1f5f9;
-}
+button:hover { background: #f1f5f9; }
 
-/* =========================
-   HOME HERO / CAROUSEL
-   ========================= */
+/* hero */
 #hero_carousel {
   background: #0b0f14;
   color: #fff;
-  border: 1px solid #1f2a37;
-  border-radius: 12px;
-  padding: 14px;
-  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 18px;
+  padding: 16px;
 }
 
-/* Make it feel like a banner */
 #carousel_viewport {
-  border-radius: 12px;
-  padding: 16px;
-  background:
-    linear-gradient(90deg, rgba(0,0,0,0.85), rgba(0,0,0,0.25)),
-    radial-gradient(circle at 25% 20%, rgba(255,255,255,0.08), transparent 60%);
-  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 18px;
+  padding: 18px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: linear-gradient(135deg, rgba(59,130,246,0.20), rgba(0,0,0,0.55));
+}
+
+#carousel_slide {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 14px;
+  align-items: center;
 }
 
 #carousel_slide h4 {
-  margin: 0 0 8px 0;
-  font-size: 28px;
-  letter-spacing: 0.5px;
+  margin: 0 0 10px 0;
+  font-size: 30px;
+  font-weight: 900;
 }
 
 #carousel_slide p {
   margin: 6px 0;
   color: #e5e7eb;
-  max-width: 700px;
+  max-width: 720px;
 }
 
 #carousel_game_img {
   width: 100%;
   max-width: 520px;
   height: auto;
-  margin-top: 12px;
-  border-radius: 10px;
-  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow: 0 18px 34px rgba(0,0,0,0.35);
 }
 
-/* Carousel buttons */
 #hero_carousel button {
-  border: 1px solid rgba(255,255,255,0.2);
-  background: rgba(255,255,255,0.08);
-  color: #fff;
-}
-
-#hero_carousel button:hover {
-  background: rgba(255,255,255,0.14);
-}
-
-/* =========================
-   RECOMMENDED "TILES" ROW
-   (looks like promo cards under hero)
-   ========================= */
-/* Recommended section */
-/* Recommended section container */
-#recommended_section {
-  margin-top: 30px;
-}
-
-#recommended_section h3 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-/* Horizontal scroll layout */
-#recommended_list {
-  display: flex;
-  gap: 20px;
-  overflow-x: auto;       /* allows horizontal scrolling */
-  padding-bottom: 10px;
-}
-
-/* Hide ugly scrollbar on WebKit browsers */
-#recommended_list::-webkit-scrollbar {
-  height: 8px;
-}
-
-#recommended_list::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 4px;
-}
-
-/* Card styling */
-#recommended_list .game_card {
-  min-width: 260px;       /* fixed width cards */
-  flex-shrink: 0;         /* prevents shrinking */
-  border-radius: 12px;
-  border: 1px solid #e5e7eb;
-  padding: 16px;
-  background: #1f2937;
-  color: #ffffff;
-  text-align: center;
-  transition: transform 0.2s ease;
-}
-
-#recommended_list .game_card:hover {
-  transform: translateY(-4px);
-}
-
-#recommended_list .game_card h4 {
-  margin-bottom: 10px;
-}
-
-#recommended_list .game_card button {
-  margin-top: 10px;
-}
-
-/* =========================
-   GAMES CONTROLS (filters area)
-   ========================= */
-#games_controls {
-  background: #0f172a;
-  color: #e5e7eb;
-  border: 1px solid #1f2a37;
-  border-radius: 12px;
-  padding: 14px;
-  margin-bottom: 14px;
-}
-
-/* Make all filter inputs and selects same width */
-#games_controls input,
-#games_controls select {
-  width: 280px;      /* same width for everything */
-  max-width: 100%;
-  padding: 8px;
-  border: 1px solid #cbd5e1;
-  border-radius: 6px;
-  box-sizing: border-box; /* ensures padding doesn't change width */
-}
-
-#games_controls label {
-  font-size: 13px;
-  color: #cbd5e1;
-}
-
-input, select {
-  width: 280px;
-  max-width: 100%;
-  padding: 8px;
-  border: 1px solid #cbd5e1;
-  border-radius: 6px;
-  margin-top: 6px;
-}
-
-#games_controls button {
   border: 1px solid rgba(255,255,255,0.18);
   background: rgba(255,255,255,0.10);
   color: #fff;
 }
 
-#games_controls button:hover {
-  background: rgba(255,255,255,0.16);
+#hero_carousel button:hover { background: rgba(255,255,255,0.16); }
+
+/* recommended */
+#recommended_section { margin-top: 24px; }
+
+#recommended_section h3 {
+  text-align: center;
+  margin-bottom: 12px;
 }
 
-/* =========================
-   GAME CARDS
-   ========================= */
+#recommended_list {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  padding: 8px 6px 12px 6px;
+}
 
+#recommended_list::-webkit-scrollbar { height: 10px; }
+#recommended_list::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 999px;
+}
+
+#recommended_list .game_card {
+  min-width: 260px;
+  flex-shrink: 0;
+  border-radius: 16px;
+  padding: 14px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: #111827;
+  color: #fff;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.22);
+}
+
+#recommended_list .game_card h4 {
+  margin: 10px 0 8px 0;
+  font-size: 16px;
+  font-weight: 900;
+}
+
+#recommended_list .game_card p {
+  margin: 0 0 10px 0;
+  color: #e5e7eb;
+}
+
+#recommended_list .game_card button {
+  width: 100%;
+  border: 1px solid rgba(59,130,246,0.35);
+  background: rgba(59,130,246,0.20);
+  color: #fff;
+}
+
+#recommended_list .game_card button:hover {
+  background: rgba(59,130,246,0.28);
+}
+
+.rec_img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+/* controls */
+#games_controls {
+  background: #0f172a;
+  color: #e5e7eb;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 14px;
+}
+
+#games_controls label {
+  font-size: 12px;
+  font-weight: 800;
+  color: #cbd5e1;
+}
+
+#filter_form p { margin: 10px 0; }
+
+#games_controls button {
+  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(255,255,255,0.10);
+  color: #fff;
+}
+
+#games_controls button:hover { background: rgba(255,255,255,0.16); }
+
+/* cards */
 .game_card {
-  border: 1px solid #dddddd;
-  border-radius: 6px;
-  padding: 12px;
-  margin-bottom: 12px;
-  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 14px;
+  background: #fff;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.06);
 }
 
 .game_card h4 {
-  margin: 0 0 6px 0;
+  margin: 10px 0 6px 0;
   font-size: 16px;
+  font-weight: 900;
+  color: #0f172a;
 }
 
 .game_card p {
   margin: 4px 0;
+  color: #334155;
+  font-size: 13px;
 }
 
-/* Grid view (cards side-by-side) */
-#games_list.grid_view .game_card {
-  display: inline-block;
-  width: 240px;
-  vertical-align: top;
-  margin-right: 12px;
+.card_img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  background: #f8fafc;
 }
 
-/* List view (full width stacked) */
+/* grid */
+#games_list.grid_view {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+#games_list.grid_view .game_card { margin-bottom: 0; }
+
+/* list */
 #games_list.list_view .game_card {
-  display: block;
-  width: auto;
-  margin-right: 0;
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 14px;
+  align-items: start;
 }
 
-/* Buttons: original basic style (no forced full width) */
+#games_list.list_view .card_img { height: 150px; }
+
+/* buttons */
 .game_card button {
   width: auto;
-  margin-top: 6px;
+  margin-top: 8px;
   margin-right: 6px;
-  padding: 8px 10px;
-  border-radius: 6px;
+  padding: 9px 12px;
+  border-radius: 10px;
 }
-/* =========================
-   TABLES
-   ========================= */
+
+/* actions */
+.btn_add_cart, #btn_carousel_add_cart, #btn_detail_add_cart, .w_move {
+  border-color: rgba(34,197,94,0.40) !important;
+  background: rgba(34,197,94,0.16) !important;
+}
+
+.btn_add_cart:hover, #btn_carousel_add_cart:hover, #btn_detail_add_cart:hover, .w_move:hover {
+  background: rgba(34,197,94,0.22) !important;
+}
+
+.btn_add_wishlist, #btn_carousel_add_wishlist, #btn_detail_add_wishlist {
+  border-color: rgba(59,130,246,0.40) !important;
+  background: rgba(59,130,246,0.14) !important;
+}
+
+.btn_add_wishlist:hover, #btn_carousel_add_wishlist:hover, #btn_detail_add_wishlist:hover {
+  background: rgba(59,130,246,0.20) !important;
+}
+
+/* detail */
+#detail_title {
+  margin: 0 0 8px 0;
+  font-size: 22px;
+  font-weight: 900;
+}
+
+#detail_description {
+  color: #334155;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+#detail_main_img {
+  width: 100%;
+  max-width: 920px;
+  height: auto;
+  margin-top: 12px;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 14px 24px rgba(0,0,0,0.10);
+}
+
+#thumbnail_list, #screenshot_list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.thumb_img, .shot_img {
+  width: 130px;
+  height: 82px;
+  object-fit: cover;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  cursor: pointer;
+}
+
+.thumb_img:hover, .shot_img:hover {
+  border-color: rgba(59,130,246,0.45);
+}
+
+/* tables */
 table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 10px;
-  background: #ffffff;
+  background: #fff;
 }
 
 th, td {
   border: 1px solid #e5e7eb;
-  padding: 10px;
+  padding: 12px 10px;
   text-align: left;
+  font-size: 13px;
 }
 
-thead th { background: #f1f5f9; }
+thead th {
+  background: #f1f5f9;
+  color: #334155;
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.2px;
+}
 
 tbody tr:nth-child(even) { background: #f8fafc; }
 tbody tr:hover { background: #eef2ff; }
 
-/* =========================
-   Error text
-   ========================= */
+.qty_value {
+  display: inline-block;
+  min-width: 26px;
+  text-align: center;
+  font-weight: 900;
+}
+
+/* errors */
 .error_text {
   display: inline-block;
   margin-left: 8px;
   font-size: 12px;
   color: #b91c1c;
+  font-weight: 800;
 }
 
-/* Thumbnails/screenshots */
-#thumbnail_list, #screenshot_list {
-  list-style: none;
-  padding-left: 0;
-  margin: 0;
-}
-
-#thumbnail_list li, #screenshot_list li {
-  display: inline-block;
-  margin-right: 8px;
-  margin-bottom: 8px;
-}
-
-.thumb_img, .shot_img {
-  width: 120px;
-  height: auto;
-  border: 1px solid #e5e7eb;
-  border-radius: 10px;
-}
-
-/* Footer */
+/* footer */
 #site_footer {
   background: #0b0f14;
   color: #e5e7eb;
-  padding: 16px;
-  border-top: 3px solid #1f2a37;
+  padding: 18px 16px;
+  border-top: 1px solid rgba(255,255,255,0.10);
+}
+
+#site_footer h3 {
+  margin-top: 0;
+  color: #fff;
 }
 
 #site_footer input {
-  border: 1px solid #334155;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.06);
+  color: #fff;
 }
 
 #site_footer fieldset {
   border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 10px;
-  padding: 12px;
+  border-radius: 16px;
+  padding: 14px;
 }
+
+#site_footer button {
+  border: 1px solid rgba(59,130,246,0.30);
+  background: rgba(59,130,246,0.18);
+  color: #fff;
+}
+
+#site_footer button:hover { background: rgba(59,130,246,0.26); }
 
 #footer_text {
   margin-top: 12px;
   font-size: 12px;
   color: #9ca3af;
+}
+
+/* responsive */
+@media screen and (max-width: 1120px) {
+  #games_list.grid_view { grid-template-columns: repeat(3, minmax(220px, 1fr)); }
+  #carousel_slide { grid-template-columns: 1fr; }
+  #carousel_game_img { max-width: 680px; }
+}
+
+@media screen and (max-width: 860px) {
+  #games_list.grid_view { grid-template-columns: repeat(2, minmax(220px, 1fr)); }
+  #games_list.list_view .game_card { grid-template-columns: 1fr; }
+  #games_list.list_view .card_img { height: 160px; }
+}
+
+@media screen and (max-width: 650px) {
+  #nav_list { flex-wrap: wrap; }
+  #games_list.grid_view { grid-template-columns: 1fr; }
+}
+
+/* print */
+@media print {
+  #site_header,
+  #site_footer,
+  #main_nav,
+  #page_home,
+  #page_games,
+  #page_about,
+  #page_wishlist,
+  #page_cart,
+  #page_checkout {
+    display: none !important;
+  }
+
+  #page_receipt {
+    display: block !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  body { background: #ffffff !important; }
 }
