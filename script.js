@@ -1,3 +1,5 @@
+
+// constant variables and pictures
 const TAX = 0.13;
 
 const games = [
@@ -124,6 +126,7 @@ const games = [
   }
 ];
 
+// random ganmes for recommended
 const recommended = [2, 6, 1, 8];
 
 let cart = [];
@@ -138,10 +141,12 @@ let detailId = null;
 function byId(id) { return document.getElementById(id); }
 function fmt(n) { return Number(n).toFixed(2); }
 
+//find game by id
 function findGame(id) {
   return games.find(function (g) { return g.id === id; }) || null;
 }
 
+//load wishlist and carty
 function loadData() {
   const c = localStorage.getItem("cart");
   const w = localStorage.getItem("wishlist");
@@ -149,23 +154,27 @@ function loadData() {
   wishlist = w ? JSON.parse(w) : [];
 }
 
+// add to cart and wishlist
 function saveData() {
   localStorage.setItem("cart", JSON.stringify(cart));
   localStorage.setItem("wishlist", JSON.stringify(wishlist));
 }
 
+// show page/unhide pages
 function show(pageId) {
   const pages = document.getElementsByClassName("page");
   for (let i = 0; i < pages.length; i++) pages[i].classList.add("hidden");
   byId(pageId).classList.remove("hidden");
 }
 
+// update header counts for cart and wishlist
 function updateCounts() {
   const count = cart.reduce(function (sum, item) { return sum + item.qty; }, 0);
   byId("cart_count").innerHTML = String(count);
   byId("wishlist_count").innerHTML = String(wishlist.length);
 }
 
+// show carousel game info
 function showCarousel() {
   const id = recommended[carouselIndex];
   const g = findGame(id);
@@ -179,6 +188,7 @@ function showCarousel() {
   byId("carousel_game_img").src = g.image;
 }
 
+// render recommended games on home page
 function renderRecommended() {
   const wrap = byId("recommended_list");
 
@@ -203,12 +213,15 @@ function renderRecommended() {
   }
 }
 
+
 function filteredGames() {
+
   const search = byId("search_name").value.toLowerCase();
   const cat = byId("filter_category").value;
   const plat = byId("filter_platform").value;
   const price = byId("filter_price").value;
 
+//apply search and filters to games list
   return games.filter(function (g) {
     if (search && g.name.toLowerCase().indexOf(search) === -1) return false;
     if (cat && g.category !== cat) return false;
@@ -226,9 +239,11 @@ function filteredGames() {
 }
 
 function sortGames(list) {
+// sort results
   const sort = byId("sort_by").value;
   const copy = list.slice();
 
+  //compare
   copy.sort(function (a, b) {
     if (sort === "name_asc") return a.name.localeCompare(b.name);
     if (sort === "name_desc") return b.name.localeCompare(a.name);
@@ -254,7 +269,9 @@ function renderGames() {
   }
 
   wrap.innerHTML = list.map(function (g) {
+
     return (
+      //render game cards
       '<div class="game_card">' +
         '<img class="card_img" src="' + g.image + '" alt="Game image" />' +
         "<h4>" + g.name + "</h4>" +
@@ -269,6 +286,7 @@ function renderGames() {
     );
   }).join("");
 
+  // add event listeners
   const details = wrap.getElementsByClassName("btn_view_details");
   for (let i = 0; i < details.length; i++) {
     details[i].addEventListener("click", function () {
@@ -276,6 +294,7 @@ function renderGames() {
     });
   }
 
+  // add to cart
   const addCart = wrap.getElementsByClassName("btn_add_cart");
   for (let i = 0; i < addCart.length; i++) {
     addCart[i].addEventListener("click", function () {
@@ -283,6 +302,8 @@ function renderGames() {
     });
   }
 
+
+  // add to wishlist
   const addWish = wrap.getElementsByClassName("btn_add_wishlist");
   for (let i = 0; i < addWish.length; i++) {
     addWish[i].addEventListener("click", function () {
@@ -292,6 +313,7 @@ function renderGames() {
 }
 
 function openDetail(id) {
+  // find game and show details
   const g = findGame(id);
   if (!g) return;
 
@@ -301,15 +323,16 @@ function openDetail(id) {
 
   let line = "Price: $" + fmt(g.price) + " | Rating: " + g.rating;
   if (g.description) line += "<br>" + g.description;
+
+  // render details
   byId("detail_description").innerHTML = line;
-
   byId("detail_main_img").src = g.image;
-
   byId("spec_type").innerHTML = g.category.toUpperCase();
   byId("spec_platform").innerHTML = g.platform.toUpperCase();
   byId("spec_release").innerHTML = g.release;
   byId("spec_rating").innerHTML = String(g.rating);
 
+  // thumbnails
   const thumbList = byId("thumbnail_list");
   thumbList.innerHTML = "";
   for (let i = 0; i < g.thumbnails.length; i++) {
@@ -324,6 +347,7 @@ function openDetail(id) {
     thumbList.appendChild(li);
   }
 
+  // screenshots
   const shotList = byId("screenshot_list");
   shotList.innerHTML = "";
   for (let i = 0; i < g.screenshots.length; i++) {
@@ -338,47 +362,63 @@ function openDetail(id) {
   show("page_detail");
 }
 
+// add or remove from wishlist
 function addToWishlist(id) {
+  // only allow adding if not already in wishlist
   if (wishlist.indexOf(id) !== -1) {
     updateCounts();
     renderWishlist();
     return;
   }
+  // add to wishlist
   wishlist.push(id);
   saveData();
   updateCounts();
   renderWishlist();
 }
 
+// remove from wishlist
 function removeFromWishlist(id) {
+  // filter out the id to remove
   wishlist = wishlist.filter(function (x) { return x !== id; });
   saveData();
   updateCounts();
   renderWishlist();
 }
 
+// add to cart with quantity
 function addToCart(id, qty) {
+  // check if in cart
+  // if in card increase quantity
   const item = cart.find(function (x) { return x.id === id; });
   if (item) item.qty += qty;
   else cart.push({ id: id, qty: qty });
 
+  // if not add new item with quantity
   saveData();
   updateCounts();
   renderCart();
 }
 
+// remove from cart
 function removeFromCart(id) {
+  // filter out the id to remove
   cart = cart.filter(function (x) { return x.id !== id; });
   saveData();
   updateCounts();
   renderCart();
 }
 
+// change quantity
 function changeQty(id, delta) {
+  // find item
   const item = cart.find(function (x) { return x.id === id; });
+  // if not found return
   if (!item) return;
 
+  // change quantity but not less than 1
   item.qty += delta;
+  // if quantity less than 1 set to 1
   if (item.qty < 1) item.qty = 1;
 
   saveData();
@@ -386,14 +426,17 @@ function changeQty(id, delta) {
   renderCart();
 }
 
+// render wishlist items
 function renderWishlist() {
   const tbody = byId("wishlist_rows");
 
+  // if wishlist is empty
   if (wishlist.length === 0) {
     tbody.innerHTML = '<tr><td colspan="3">Wishlist is empty.</td></tr>';
     return;
   }
 
+  // mapping wishlist id to game info
   tbody.innerHTML = wishlist.map(function (id) {
     const g = findGame(id);
     if (!g) return "";
@@ -407,6 +450,7 @@ function renderWishlist() {
     );
   }).join("");
 
+  // add event listeners for move and remove buttons
   const moveBtns = tbody.getElementsByClassName("w_move");
   for (let i = 0; i < moveBtns.length; i++) {
     moveBtns[i].addEventListener("click", function () {
@@ -416,6 +460,7 @@ function renderWishlist() {
     });
   }
 
+  // remove from wishlist
   const remBtns = tbody.getElementsByClassName("w_remove");
   for (let i = 0; i < remBtns.length; i++) {
     remBtns[i].addEventListener("click", function () {
@@ -424,10 +469,13 @@ function renderWishlist() {
   }
 }
 
+// rednder cart
 function renderCart() {
   const tbody = byId("cart_rows");
 
+  // if cart is empty 
   if (cart.length === 0) {
+    // show message and update totals to 0
     tbody.innerHTML = '<tr><td colspan="5">Cart is empty.</td></tr>';
     updateTotals(0);
     return;
@@ -435,6 +483,7 @@ function renderCart() {
 
   let subtotal = 0;
 
+  // mpa cart items to game info and render rows
   tbody.innerHTML = cart.map(function (item) {
     const g = findGame(item.id);
     if (!g) return "";
@@ -442,6 +491,7 @@ function renderCart() {
     const line = g.price * item.qty;
     subtotal += line;
 
+    // render cart
     return (
       "<tr>" +
         "<td>" + g.name + "</td>" +
@@ -455,6 +505,7 @@ function renderCart() {
     );
   }).join("");
 
+  // add event listeners
   const minus = tbody.getElementsByClassName("c_minus");
   for (let i = 0; i < minus.length; i++) {
     minus[i].addEventListener("click", function () {
@@ -479,16 +530,20 @@ function renderCart() {
   updateTotals(subtotal);
 }
 
+// calculate and update subtotal tax and total
 function updateTotals(subtotal) {
   const tax = subtotal * TAX;
   const total = subtotal + tax;
 
+  // update display
   byId("subtotal_value").innerHTML = fmt(subtotal);
   byId("tax_value").innerHTML = fmt(tax);
   byId("total_value").innerHTML = fmt(total);
 }
 
+// validate email format
 function validEmail(e) {
+  // check for @ and . for .com
   const at = e.indexOf("@");
   const dot = e.lastIndexOf(".");
   if (at < 1) return false;
@@ -497,11 +552,15 @@ function validEmail(e) {
   return true;
 }
 
+// set error messag
 function setErr(id, msg) { byId(id).innerHTML = msg; }
 function clearErr(id) { byId(id).innerHTML = ""; }
 
+
+
 function newsletterSubmit() {
   const email = byId("newsletter_email").value.trim();
+  // check email and show error if validation fails
   if (!validEmail(email)) {
     setErr("err_newsletter_email", "Please enter a valid email.");
     return;
@@ -511,18 +570,22 @@ function newsletterSubmit() {
   byId("newsletter_email").value = "";
 }
 
+// validate contact form
 function contactSubmit() {
   const email = byId("contact_email").value.trim();
   const msg = byId("contact_message").value.trim();
-
   let ok = true;
 
+  // validate email and message
   if (!validEmail(email)) { setErr("err_contact_email", "Valid email required."); ok = false; }
   else clearErr("err_contact_email");
 
+  // eror message for empty message
   if (msg === "") { setErr("err_contact_message", "Message required."); ok = false; }
   else clearErr("err_contact_message");
 
+
+  // send message and clear form lines if valid
   if (ok) {
     alert("Message sent! (demo)");
     byId("contact_email").value = "";
@@ -530,15 +593,19 @@ function contactSubmit() {
   }
 }
 
+// generate order number with date
 function orderNumber() {
+  // ORD-YYYYMMDD-####
   const d = new Date();
   const y = d.getFullYear();
   const m = String(d.getMonth() + 1).padStart(2, "0");
   const day = String(d.getDate()).padStart(2, "0");
+  // random numbers for last part
   const rand = Math.floor(Math.random() * 9000) + 1000;
   return "ORD-" + y + m + day + "-" + rand;
 }
 
+// formate date as DD/MM/YYYY
 function dateDDMMYYYY() {
   const d = new Date();
   const day = String(d.getDate()).padStart(2, "0");
@@ -547,18 +614,22 @@ function dateDDMMYYYY() {
   return day + "/" + m + "/" + y;
 }
 
+// validate checkout form
 function checkoutValid() {
   let ok = true;
 
+  
   const name = byId("pay_name").value.trim();
   const card = byId("pay_card").value.trim();
   const exp = byId("pay_exp").value.trim();
   const cvv = byId("pay_cvv").value.trim();
   const email = byId("pay_email").value.trim();
 
+  // valaidate
   if (name === "") { setErr("err_pay_name", "Required."); ok = false; }
   else clearErr("err_pay_name");
 
+  // check card number length and digits only
   if (card.length !== 16) { setErr("err_pay_card", "16 digits required."); ok = false; }
   else {
     for (let i = 0; i < card.length; i++) {
@@ -567,6 +638,7 @@ function checkoutValid() {
     if (ok) clearErr("err_pay_card");
   }
 
+  // check expiration format and values
   if (exp.length !== 5 || exp[2] !== "/") {
     setErr("err_pay_exp", "Use MM/YY.");
     ok = false;
@@ -574,6 +646,7 @@ function checkoutValid() {
     const month = parseInt(exp.substring(0, 2));
     const year = parseInt(exp.substring(3, 5));
 
+    // check month and year values and if card is expired
     if (isNaN(month) || month < 1 || month > 12) {
       setErr("err_pay_exp", "Invalid month.");
       ok = false;
@@ -585,6 +658,7 @@ function checkoutValid() {
       const currentMonth = now.getMonth() + 1;
       const currentYear = now.getFullYear() % 100;
 
+      // compare to current month and year to check if expired
       if (year < currentYear || (year === currentYear && month < currentMonth)) {
         setErr("err_pay_exp", "Card has expired.");
         ok = false;
@@ -594,17 +668,21 @@ function checkoutValid() {
     }
   }
 
+  // check cvv length and digits only
   if (!(cvv.length === 3 || cvv.length === 4)) { setErr("err_pay_cvv", "3 or 4 digits."); ok = false; }
   else clearErr("err_pay_cvv");
 
+  // validate email format
   if (!validEmail(email)) { setErr("err_pay_email", "Valid email required."); ok = false; }
   else clearErr("err_pay_email");
 
+  // check if cart is empty
   if (cart.length === 0) { alert("Your cart is empty."); ok = false; }
 
   return ok;
 }
 
+// receipt
 function buildReceipt(email) {
   byId("receipt_order_number").innerHTML = orderNumber();
   byId("receipt_order_date").innerHTML = dateDDMMYYYY();
@@ -612,13 +690,16 @@ function buildReceipt(email) {
 
   let subtotal = 0;
 
+  // get cart items and game info for reciept 
   const html = cart.map(function (item) {
     const g = findGame(item.id);
     if (!g) return "";
 
+    // calculate total and add to subtotal
     const line = g.price * item.qty;
     subtotal += line;
 
+    // render receipt rows
     return (
       "<tr>" +
         "<td>" + g.name + "</td>" +
@@ -631,25 +712,31 @@ function buildReceipt(email) {
 
   byId("receipt_rows").innerHTML = html;
 
+  // calculate tax and total
   const tax = subtotal * TAX;
   const total = subtotal + tax;
 
+  // update receipt totals
   byId("receipt_subtotal").innerHTML = fmt(subtotal);
   byId("receipt_tax").innerHTML = fmt(tax);
   byId("receipt_total").innerHTML = fmt(total);
 }
 
+// place order and show receipt
 function placeOrder() {
   if (!checkoutValid()) return;
 
+  // show processing message
   byId("processing_area").classList.remove("hidden");
 
+  // show recipet 
   setTimeout(function () {
     byId("processing_area").classList.add("hidden");
 
     const email = byId("pay_email").value.trim();
     buildReceipt(email);
 
+    // clear cart and update
     cart = [];
     saveData();
     updateCounts();
@@ -659,28 +746,35 @@ function placeOrder() {
   }, 1000);
 }
 
+// event listeners and initial setup
 function setup() {
   loadData();
   updateCounts();
 
+  // navigation
   byId("nav_home").addEventListener("click", function (e) { e.preventDefault(); show("page_home"); });
   byId("nav_games").addEventListener("click", function (e) { e.preventDefault(); show("page_games"); renderGames(); });
   byId("nav_about").addEventListener("click", function (e) { e.preventDefault(); show("page_about"); });
   byId("nav_wishlist").addEventListener("click", function (e) { e.preventDefault(); show("page_wishlist"); renderWishlist(); });
   byId("nav_cart").addEventListener("click", function (e) { e.preventDefault(); show("page_cart"); renderCart(); });
 
+
+  // carousel controls
   function nextSlide() {
     carouselIndex++;
     if (carouselIndex >= recommended.length) carouselIndex = 0;
     showCarousel();
   }
 
+
+  // back
   function prevSlide() {
     carouselIndex--;
     if (carouselIndex < 0) carouselIndex = recommended.length - 1;
     showCarousel();
   }
 
+  // restart auto carousel timer
   function startCarouselAuto() {
     if (carouselTimer) clearInterval(carouselTimer);
     carouselTimer = setInterval(function () {
@@ -688,16 +782,20 @@ function setup() {
     }, 4000);
   }
 
+  // event listeners for carousel
+  // previous
   byId("btn_carousel_prev").addEventListener("click", function () {
     prevSlide();
     startCarouselAuto();
   });
 
+  // next
   byId("btn_carousel_next").addEventListener("click", function () {
     nextSlide();
     startCarouselAuto();
   });
 
+  // view details
   byId("btn_carousel_view_details").addEventListener("click", function () {
     openDetail(recommended[carouselIndex]);
   });
@@ -710,15 +808,18 @@ function setup() {
     addToWishlist(recommended[carouselIndex]);
   });
 
+  // event listeners for games page
   byId("btn_search").addEventListener("click", function () { renderGames(); });
   byId("btn_apply_sort").addEventListener("click", function () { renderGames(); });
   byId("filter_category").addEventListener("change", function () { renderGames(); });
   byId("filter_platform").addEventListener("change", function () { renderGames(); });
   byId("filter_price").addEventListener("change", function () { renderGames(); });
 
+  // change for grid and list view
   byId("btn_view_grid").addEventListener("click", function () { viewMode = "grid"; renderGames(); });
   byId("btn_view_list").addEventListener("click", function () { viewMode = "list"; renderGames(); });
 
+  // clear filters and search
   byId("btn_clear_filters").addEventListener("click", function () {
     byId("search_name").value = "";
     byId("filter_category").value = "";
@@ -728,6 +829,7 @@ function setup() {
     renderGames();
   });
 
+  // event listeners for detail page
   byId("btn_detail_add_cart").addEventListener("click", function () {
     if (detailId !== null) addToCart(detailId, 1);
   });
@@ -765,6 +867,7 @@ function setup() {
     placeOrder();
   });
 
+  // show home page and initial render
   show("page_home");
   showCarousel();
   renderRecommended();
@@ -772,6 +875,7 @@ function setup() {
   renderCart();
   startCarouselAuto();
 
+  // prevent default form submission
   document.getElementById("filter_form").addEventListener("submit", function (event) {
     event.preventDefault();
     renderGames();
