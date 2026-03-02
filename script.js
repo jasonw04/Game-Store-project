@@ -8,7 +8,8 @@ const games = [
    thumbnails: [
       "https://picsum.photos/seed/action-thumb-1a/200/120",
       "https://picsum.photos/seed/action-thumb-1b/200/120",
-      "https://picsum.photos/seed/action-thumb-1c/200/120"
+      "https://picsum.photos/seed/action-thumb-1c/200/120",
+      "https://picsum.photos/seed/action-thumb-1d/200/120"
     ],
    screenshots: [
       "https://picsum.photos/seed/action-shot-1a/800/450",
@@ -21,7 +22,8 @@ const games = [
    thumbnails: [
       "https://picsum.photos/seed/rpg-thumb-2a/200/120",
       "https://picsum.photos/seed/rpg-thumb-2b/200/120",
-      "https://picsum.photos/seed/rpg-thumb-2c/200/120"
+      "https://picsum.photos/seed/rpg-thumb-2c/200/120",
+      "https://picsum.photos/seed/rpg-thumb-2d/200/120"
     ],
    screenshots: [
       "https://picsum.photos/seed/rpg-shot-2a/800/450",
@@ -34,7 +36,8 @@ const games = [
    thumbnails: [
       "https://picsum.photos/seed/sports-thumb-3a/200/120",
       "https://picsum.photos/seed/sports-thumb-3b/200/120",
-      "https://picsum.photos/seed/sports-thumb-3c/200/120"
+      "https://picsum.photos/seed/sports-thumb-3c/200/120",
+      "https://picsum.photos/seed/sports-thumb-3d/200/120"
     ],
    screenshots: [
       "https://picsum.photos/seed/sports-shot-3a/800/450",
@@ -47,7 +50,8 @@ const games = [
    thumbnails: [
       "https://picsum.photos/seed/strategy-thumb-4a/200/120",
       "https://picsum.photos/seed/strategy-thumb-4b/200/120",
-      "https://picsum.photos/seed/strategy-thumb-4c/200/120"
+      "https://picsum.photos/seed/strategy-thumb-4c/200/120",
+      "https://picsum.photos/seed/strategy-thumb-4d/200/120"
     ],
    screenshots: [
       "https://picsum.photos/seed/strategy-shot-4a/800/450",
@@ -60,7 +64,8 @@ const games = [
    thumbnails: [
       "https://picsum.photos/seed/action-thumb-5a/200/120",
       "https://picsum.photos/seed/action-thumb-5b/200/120",
-      "https://picsum.photos/seed/action-thumb-5c/200/120"
+      "https://picsum.photos/seed/action-thumb-5c/200/120",
+      "https://picsum.photos/seed/action-thumb-5d/200/120"
     ],
    screenshots: [
       "https://picsum.photos/seed/action-shot-5a/800/450",
@@ -73,7 +78,8 @@ const games = [
    thumbnails: [
       "https://picsum.photos/seed/rpg-thumb-6a/200/120",
       "https://picsum.photos/seed/rpg-thumb-6b/200/120",
-      "https://picsum.photos/seed/rpg-thumb-6c/200/120"
+      "https://picsum.photos/seed/rpg-thumb-6c/200/120",
+      "https://picsum.photos/seed/rpg-thumb-6d/200/120"
     ],
    screenshots: [
       "https://picsum.photos/seed/rpg-shot-6a/800/450",
@@ -86,7 +92,8 @@ const games = [
    thumbnails: [
       "https://picsum.photos/seed/sports-thumb-7a/200/120",
       "https://picsum.photos/seed/sports-thumb-7b/200/120",
-      "https://picsum.photos/seed/sports-thumb-7c/200/120"
+      "https://picsum.photos/seed/sports-thumb-7c/200/120",
+      "https://picsum.photos/seed/sports-thumb-7d/200/120"
     ],
    screenshots: [
       "https://picsum.photos/seed/sports-shot-7a/800/450",
@@ -99,7 +106,8 @@ const games = [
    thumbnails: [
       "https://picsum.photos/seed/strategy-thumb-8a/200/120",
       "https://picsum.photos/seed/strategy-thumb-8b/200/120",
-      "https://picsum.photos/seed/strategy-thumb-8c/200/120"
+      "https://picsum.photos/seed/strategy-thumb-8c/200/120",
+      "https://picsum.photos/seed/strategy-thumb-8d/200/120"
     ],
    screenshots: [
       "https://picsum.photos/seed/strategy-shot-8a/800/450",
