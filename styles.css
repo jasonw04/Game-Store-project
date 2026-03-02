@@ -1,7 +1,6 @@
 html, body { height: 100%; }
 * { box-sizing: border-box; }
 
-//BODY STYLE
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
@@ -10,7 +9,7 @@ body {
   line-height: 1.35;
 }
 
-//HEADER STYLE
+/* header */
 #site_header {
   position: sticky;
   top: 0;
@@ -24,7 +23,6 @@ body {
   padding: 10px 16px;
 }
 
-//TITLE
 #site_title {
   margin: 0;
   font-size: 18px;
@@ -32,7 +30,7 @@ body {
   letter-spacing: 0.3px;
 }
 
-//NAV
+/* nav */
 #main_nav { margin: 0; }
 
 #nav_list {
@@ -61,7 +59,7 @@ body {
   color: #fff;
 }
 
-//Wishlist and Cart Badges
+/* badges */
 #wishlist_count, #cart_count {
   display: inline-block;
   min-width: 22px;
@@ -74,14 +72,14 @@ body {
   border: 1px solid rgba(59,130,246,0.30);
 }
 
-//LAYOUT
+/* layout */
 #main_content {
   max-width: 1200px;
   margin: 0 auto;
   padding: 16px;
 }
 
-//PAGES STYLE
+/* pages */
 .page {
   background: #fff;
   border: 1px solid #e5e7eb;
@@ -93,21 +91,19 @@ body {
 
 .hidden { display: none; }
 
-//HEADER 2
 h2 {
   margin: 0 0 12px 0;
   font-size: 22px;
   font-weight: 900;
 }
 
-//HEADER 3
 h3 {
   margin: 14px 0 10px 0;
   font-size: 15px;
   font-weight: 900;
 }
 
-//FORM
+/* form */
 input, select {
   width: 280px;
   max-width: 100%;
@@ -124,7 +120,7 @@ input:focus, select:focus {
   box-shadow: 0 0 0 4px rgba(59,130,246,0.12);
 }
 
-//BUTTONS
+/* buttons */
 button {
   border: 1px solid #cbd5e1;
   background: #fff;
@@ -137,7 +133,7 @@ button {
 
 button:hover { background: #f1f5f9; }
 
-//HERO CAROUSEL
+/* hero */
 #hero_carousel {
   background: #0b0f14;
   color: #fff;
@@ -189,7 +185,7 @@ button:hover { background: #f1f5f9; }
 
 #hero_carousel button:hover { background: rgba(255,255,255,0.16); }
 
-//RECOMMENDED GAMES
+/* recommended */
 #recommended_section { margin-top: 24px; }
 
 #recommended_section h3 {
@@ -251,7 +247,7 @@ button:hover { background: #f1f5f9; }
   border: 1px solid rgba(255,255,255,0.12);
 }
 
-//CONTROLS
+/* controls */
 #games_controls {
   background: #0f172a;
   color: #e5e7eb;
@@ -277,7 +273,7 @@ button:hover { background: #f1f5f9; }
 
 #games_controls button:hover { background: rgba(255,255,255,0.16); }
 
-//GAME CARDS
+/* cards */
 .game_card {
   border: 1px solid #e5e7eb;
   border-radius: 14px;
@@ -308,7 +304,7 @@ button:hover { background: #f1f5f9; }
   background: #f8fafc;
 }
 
-//GAME GRID LIST
+/* grid */
 #games_list.grid_view {
   display: grid;
   grid-template-columns: repeat(4, minmax(220px, 1fr));
@@ -317,7 +313,7 @@ button:hover { background: #f1f5f9; }
 
 #games_list.grid_view .game_card { margin-bottom: 0; }
 
-//GAME LIST
+/* list */
 #games_list.list_view .game_card {
   display: grid;
   grid-template-columns: 220px 1fr;
@@ -327,7 +323,7 @@ button:hover { background: #f1f5f9; }
 
 #games_list.list_view .card_img { height: 150px; }
 
-//GAME CARD BUTTONS
+/* buttons */
 .game_card button {
   width: auto;
   margin-top: 8px;
@@ -336,7 +332,7 @@ button:hover { background: #f1f5f9; }
   border-radius: 10px;
 }
 
-//ADD TO CART INTERACTIONS
+/* actions */
 .btn_add_cart, #btn_carousel_add_cart, #btn_detail_add_cart, .w_move {
   border-color: rgba(34,197,94,0.40) !important;
   background: rgba(34,197,94,0.16) !important;
@@ -355,7 +351,7 @@ button:hover { background: #f1f5f9; }
   background: rgba(59,130,246,0.20) !important;
 }
 
-//DETAIL STYLE
+/* detail */
 #detail_title {
   margin: 0 0 8px 0;
   font-size: 22px;
@@ -400,7 +396,7 @@ button:hover { background: #f1f5f9; }
   border-color: rgba(59,130,246,0.45);
 }
 
-//TABLES STYLE
+/* tables */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -434,7 +430,7 @@ tbody tr:hover { background: #eef2ff; }
   font-weight: 900;
 }
 
-//ERROR
+/* errors */
 .error_text {
   display: inline-block;
   margin-left: 8px;
@@ -443,7 +439,7 @@ tbody tr:hover { background: #eef2ff; }
   font-weight: 800;
 }
 
-//FOOTER
+/* footer */
 #site_footer {
   background: #0b0f14;
   color: #e5e7eb;
@@ -482,7 +478,25 @@ tbody tr:hover { background: #eef2ff; }
   color: #9ca3af;
 }
 
-//PRINT LAYOUT
+/* responsive */
+@media screen and (max-width: 1120px) {
+  #games_list.grid_view { grid-template-columns: repeat(3, minmax(220px, 1fr)); }
+  #carousel_slide { grid-template-columns: 1fr; }
+  #carousel_game_img { max-width: 680px; }
+}
+
+@media screen and (max-width: 860px) {
+  #games_list.grid_view { grid-template-columns: repeat(2, minmax(220px, 1fr)); }
+  #games_list.list_view .game_card { grid-template-columns: 1fr; }
+  #games_list.list_view .card_img { height: 160px; }
+}
+
+@media screen and (max-width: 650px) {
+  #nav_list { flex-wrap: wrap; }
+  #games_list.grid_view { grid-template-columns: 1fr; }
+}
+
+/* print */
 @media print {
   #site_header,
   #site_footer,
