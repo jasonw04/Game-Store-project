@@ -1,15 +1,14 @@
-// script.js - basic features for the single-page store
-
 const TAX = 0.13;
 
-// 8 games
 const games = [
   {id: 1, name: "Sky Battle", category: "action", platform: "pc", price: 49.99, rating: 4.6, release: "2025-09-12", image: "https://picsum.photos/seed/action-main-1/800/450",
+   description: "Quick arena fights in the air. It’s more about movement and timing than button mashing.",
    thumbnails: [
       "https://picsum.photos/seed/action-thumb-1a/200/120",
       "https://picsum.photos/seed/action-thumb-1b/200/120",
       "https://picsum.photos/seed/action-thumb-1c/200/120",
       "https://picsum.photos/seed/action-thumb-1d/200/120"
+
     ],
    screenshots: [
       "https://picsum.photos/seed/action-shot-1a/800/450",
@@ -19,6 +18,7 @@ const games = [
     ]
   },
   {id: 2, name: "Dungeon Quest", category: "rpg", platform: "ps5", price: 69.99, rating: 4.8, release: "2024-11-20", image: "https://picsum.photos/seed/rpg-main-2/800/450",
+   description: "Classic party RPG. Explore, level up, and hunt for loot without it feeling overwhelming.",
    thumbnails: [
       "https://picsum.photos/seed/rpg-thumb-2a/200/120",
       "https://picsum.photos/seed/rpg-thumb-2b/200/120",
@@ -33,6 +33,7 @@ const games = [
     ]
   },
   {id: 3, name: "Street Hoops", category: "sports", platform: "xbox", price: 39.99, rating: 4.1, release: "2023-06-01", image: "https://picsum.photos/seed/sports-main-3/800/450",
+   description: "Arcade basketball with fast games. Easy to pick up, but you can still get competitive.",
    thumbnails: [
       "https://picsum.photos/seed/sports-thumb-3a/200/120",
       "https://picsum.photos/seed/sports-thumb-3b/200/120",
@@ -47,6 +48,7 @@ const games = [
     ]
   },
   {id: 4, name: "Galaxy Tactics", category: "strategy", platform: "pc", price: 29.99, rating: 4.3, release: "2022-03-15", image: "https://picsum.photos/seed/strategy-main-4/800/450",
+   description: "Strategy that rewards planning. You win more by thinking ahead than by rushing.",
    thumbnails: [
       "https://picsum.photos/seed/strategy-thumb-4a/200/120",
       "https://picsum.photos/seed/strategy-thumb-4b/200/120",
@@ -61,6 +63,7 @@ const games = [
     ]
   },
   {id: 5, name: "Neon Runner", category: "action", platform: "switch", price: 19.99, rating: 4.0, release: "2021-08-10", image: "https://picsum.photos/seed/action-main-5/800/450",
+   description: "A clean, fast runner. Short levels, quick restarts, and it doesn’t waste your time.",
    thumbnails: [
       "https://picsum.photos/seed/action-thumb-5a/200/120",
       "https://picsum.photos/seed/action-thumb-5b/200/120",
@@ -75,6 +78,7 @@ const games = [
     ]
   },
   {id: 6, name: "Kingdom Stories", category: "rpg", platform: "pc", price: 59.99, rating: 4.7, release: "2025-01-30", image: "https://picsum.photos/seed/rpg-main-6/800/450",
+   description: "Long story RPG with builds and choices. Good if you like exploring and finishing quests.",
    thumbnails: [
       "https://picsum.photos/seed/rpg-thumb-6a/200/120",
       "https://picsum.photos/seed/rpg-thumb-6b/200/120",
@@ -89,6 +93,7 @@ const games = [
     ]
   },
   {id: 7, name: "Pro League Soccer", category: "sports", platform: "ps5", price: 79.99, rating: 4.2, release: "2024-09-05", image: "https://picsum.photos/seed/sports-main-7/800/450",
+   description: "Modern soccer with quick controls. Feels smooth and competitive without being too complicated.",
    thumbnails: [
       "https://picsum.photos/seed/sports-thumb-7a/200/120",
       "https://picsum.photos/seed/sports-thumb-7b/200/120",
@@ -103,6 +108,7 @@ const games = [
     ]
   },
   {id: 8, name: "Island Empire", category: "strategy", platform: "switch", price: 24.99, rating: 4.4, release: "2023-12-18", image: "https://picsum.photos/seed/strategy-main-8/800/450",
+   description: "Build up an island, expand slowly, and keep things efficient. It’s chill but still strategic.",
    thumbnails: [
       "https://picsum.photos/seed/strategy-thumb-8a/200/120",
       "https://picsum.photos/seed/strategy-thumb-8b/200/120",
@@ -118,36 +124,27 @@ const games = [
   }
 ];
 
-// 4 recommended
 const recommended = [2, 6, 1, 8];
 
-let cart = [];     // [{id, qty}]
-let wishlist = []; // [id]
+let cart = [];
+let wishlist = [];
 let viewMode = "grid";
+
 let carouselIndex = 0;
 let carouselTimer = null;
+
 let detailId = null;
 
-function byId(id) {
-  return document.getElementById(id);
-}
-
-function fmt(n) {
-  return Number(n).toFixed(2);
-}
+function byId(id) { return document.getElementById(id); }
+function fmt(n) { return Number(n).toFixed(2); }
 
 function findGame(id) {
-  for (let i = 0; i < games.length; i++) {
-    if (games[i].id === id) return games[i];
-  }
-  return null;
+  return games.find(function (g) { return g.id === id; }) || null;
 }
 
-/* ---------- storage ---------- */
 function loadData() {
   const c = localStorage.getItem("cart");
   const w = localStorage.getItem("wishlist");
-
   cart = c ? JSON.parse(c) : [];
   wishlist = w ? JSON.parse(w) : [];
 }
@@ -157,26 +154,18 @@ function saveData() {
   localStorage.setItem("wishlist", JSON.stringify(wishlist));
 }
 
-/* ---------- page switching ---------- */
 function show(pageId) {
   const pages = document.getElementsByClassName("page");
-  for (let i = 0; i < pages.length; i++) {
-    pages[i].classList.add("hidden");
-  }
+  for (let i = 0; i < pages.length; i++) pages[i].classList.add("hidden");
   byId(pageId).classList.remove("hidden");
 }
 
-/* ---------- badges ---------- */
 function updateCounts() {
-  let count = 0;
-  for (let i = 0; i < cart.length; i++) {
-    count += cart[i].qty;
-  }
+  const count = cart.reduce(function (sum, item) { return sum + item.qty; }, 0);
   byId("cart_count").innerHTML = String(count);
   byId("wishlist_count").innerHTML = String(wishlist.length);
 }
 
-/* ---------- home carousel ---------- */
 function showCarousel() {
   const id = recommended[carouselIndex];
   const g = findGame(id);
@@ -190,90 +179,70 @@ function showCarousel() {
   byId("carousel_game_img").src = g.image;
 }
 
-/* ---------- recommended cards ---------- */
 function renderRecommended() {
   const wrap = byId("recommended_list");
-  let html = "";
 
-  for (let i = 0; i < recommended.length; i++) {
-    const g = findGame(recommended[i]);
-    if (!g) continue;
-
-    html += '<div class="game_card">';
-    html += "<h4>" + g.name + "</h4>";
-    html += "<p>$" + fmt(g.price) + " | Rating: " + g.rating + "</p>";
-    html += '<button type="button" class="btn_view_details" data-id="' + g.id + '">View Details</button>';
-    html += "</div>";
-  }
-
-  wrap.innerHTML = html;
+  wrap.innerHTML = recommended.map(function (rid) {
+    const g = findGame(rid);
+    if (!g) return "";
+    return (
+      '<div class="game_card">' +
+        '<img class="rec_img" src="' + g.image + '" alt="Game image" />' +
+        "<h4>" + g.name + "</h4>" +
+        "<p>$" + fmt(g.price) + " | Rating: " + g.rating + "</p>" +
+        '<button type="button" class="btn_view_details" data-id="' + g.id + '">View Details</button>' +
+      "</div>"
+    );
+  }).join("");
 
   const btns = wrap.getElementsByClassName("btn_view_details");
   for (let i = 0; i < btns.length; i++) {
     btns[i].addEventListener("click", function () {
-      const id = Number(this.getAttribute("data-id"));
-      openDetail(id);
+      openDetail(Number(this.getAttribute("data-id")));
     });
   }
 }
 
-/* ---------- games list ---------- */
 function filteredGames() {
   const search = byId("search_name").value.toLowerCase();
   const cat = byId("filter_category").value;
   const plat = byId("filter_platform").value;
   const price = byId("filter_price").value;
 
-  const out = [];
-
-  for (let i = 0; i < games.length; i++) {
-    const g = games[i];
-
-    if (search && g.name.toLowerCase().indexOf(search) === -1) continue;
-    if (cat && g.category !== cat) continue;
-    if (plat && g.platform !== plat) continue;
+  return games.filter(function (g) {
+    if (search && g.name.toLowerCase().indexOf(search) === -1) return false;
+    if (cat && g.category !== cat) return false;
+    if (plat && g.platform !== plat) return false;
 
     if (price) {
-      if (price === "0-20" && !(g.price >= 0 && g.price <= 20)) continue;
-      if (price === "20-40" && !(g.price > 20 && g.price <= 40)) continue;
-      if (price === "40-60" && !(g.price > 40 && g.price <= 60)) continue;
-      if (price === "60+" && !(g.price > 60)) continue;
+      if (price === "0-20" && !(g.price >= 0 && g.price <= 20)) return false;
+      if (price === "20-40" && !(g.price > 20 && g.price <= 40)) return false;
+      if (price === "40-60" && !(g.price > 40 && g.price <= 60)) return false;
+      if (price === "60+" && !(g.price > 60)) return false;
     }
 
-    out.push(g);
-  }
-
-  return out;
+    return true;
+  });
 }
 
 function sortGames(list) {
   const sort = byId("sort_by").value;
+  const copy = list.slice();
 
-  for (let i = 0; i < list.length; i++) {
-    for (let j = 0; j < list.length - 1; j++) {
-      let swap = false;
+  copy.sort(function (a, b) {
+    if (sort === "name_asc") return a.name.localeCompare(b.name);
+    if (sort === "name_desc") return b.name.localeCompare(a.name);
+    if (sort === "price_asc") return a.price - b.price;
+    if (sort === "price_desc") return b.price - a.price;
+    if (sort === "rating_desc") return b.rating - a.rating;
+    return 0;
+  });
 
-      if (sort === "name_asc" && list[j].name > list[j + 1].name) swap = true;
-      if (sort === "name_desc" && list[j].name < list[j + 1].name) swap = true;
-      if (sort === "price_asc" && list[j].price > list[j + 1].price) swap = true;
-      if (sort === "price_desc" && list[j].price < list[j + 1].price) swap = true;
-      if (sort === "rating_desc" && list[j].rating < list[j + 1].rating) swap = true;
-
-      if (swap) {
-        const temp = list[j];
-        list[j] = list[j + 1];
-        list[j + 1] = temp;
-      }
-    }
-  }
-
-  return list;
+  return copy;
 }
 
 function renderGames() {
-  let list = filteredGames();
-  list = sortGames(list);
-
+  let list = sortGames(filteredGames());
   const wrap = byId("games_list");
 
   if (viewMode === "grid") {
@@ -284,24 +253,22 @@ function renderGames() {
     wrap.classList.remove("grid_view");
   }
 
-  let html = "";
-  for (let i = 0; i < list.length; i++) {
-    const g = list[i];
-    html += '<div class="game_card">';
-    html += "<h4>" + g.name + "</h4>";
-    html += "<p>Category: " + g.category.toUpperCase() + "</p>";
-    html += "<p>Platform: " + g.platform.toUpperCase() + "</p>";
-    html += "<p>Price: $" + fmt(g.price) + "</p>";
-    html += "<p>Rating: " + g.rating + "</p>";
-    html += '<button type="button" class="btn_view_details" data-id="' + g.id + '">View Details</button> ';
-    html += '<button type="button" class="btn_add_cart" data-id="' + g.id + '">Add to Cart</button> ';
-    html += '<button type="button" class="btn_add_wishlist" data-id="' + g.id + '">Add to Wishlist</button>';
-    html += "</div>";
-  }
+  wrap.innerHTML = list.map(function (g) {
+    return (
+      '<div class="game_card">' +
+        '<img class="card_img" src="' + g.image + '" alt="Game image" />' +
+        "<h4>" + g.name + "</h4>" +
+        "<p>Category: " + g.category.toUpperCase() + "</p>" +
+        "<p>Platform: " + g.platform.toUpperCase() + "</p>" +
+        "<p>Price: $" + fmt(g.price) + "</p>" +
+        "<p>Rating: " + g.rating + "</p>" +
+        '<button type="button" class="btn_view_details" data-id="' + g.id + '">View Details</button> ' +
+        '<button type="button" class="btn_add_cart" data-id="' + g.id + '">Add to Cart</button> ' +
+        '<button type="button" class="btn_add_wishlist" data-id="' + g.id + '">Add to Wishlist</button>' +
+      "</div>"
+    );
+  }).join("");
 
-  wrap.innerHTML = html;
-
-  // events
   const details = wrap.getElementsByClassName("btn_view_details");
   for (let i = 0; i < details.length; i++) {
     details[i].addEventListener("click", function () {
@@ -324,61 +291,58 @@ function renderGames() {
   }
 }
 
-/* ---------- detail ---------- */
 function openDetail(id) {
   const g = findGame(id);
-  const thumbList = byId("thumbnail_list");
-  thumbList.innerHTML = "";
-  const shotList = byId("screenshot_list");
-  shotList.innerHTML = "";
   if (!g) return;
+
   detailId = id;
 
   byId("detail_title").innerHTML = g.name;
-  byId("detail_description").innerHTML = "Price: $" + fmt(g.price) + " | Rating: " + g.rating;
+
+  let line = "Price: $" + fmt(g.price) + " | Rating: " + g.rating;
+  if (g.description) line += "<br>" + g.description;
+  byId("detail_description").innerHTML = line;
+
   byId("detail_main_img").src = g.image;
+
   byId("spec_type").innerHTML = g.category.toUpperCase();
   byId("spec_platform").innerHTML = g.platform.toUpperCase();
   byId("spec_release").innerHTML = g.release;
   byId("spec_rating").innerHTML = String(g.rating);
 
-  g.thumbnails.forEach(function (imgUrl) {
+  const thumbList = byId("thumbnail_list");
+  thumbList.innerHTML = "";
+  for (let i = 0; i < g.thumbnails.length; i++) {
     const li = document.createElement("li");
     const img = document.createElement("img");
-
-    img.src = imgUrl;
+    img.src = g.thumbnails[i];
     img.className = "thumb_img";
-
     img.addEventListener("click", function () {
-      byId("detail_main_img").src = imgUrl;
+      byId("detail_main_img").src = this.src;
     });
-
     li.appendChild(img);
     thumbList.appendChild(li);
-  });
+  }
 
-  g.screenshots.forEach(function (imgUrl) {
+  const shotList = byId("screenshot_list");
+  shotList.innerHTML = "";
+  for (let i = 0; i < g.screenshots.length; i++) {
     const li = document.createElement("li");
     const img = document.createElement("img");
-
-    img.src = imgUrl;
+    img.src = g.screenshots[i];
     img.className = "shot_img";
-
     li.appendChild(img);
     shotList.appendChild(li);
-  });
-  
+  }
+
   show("page_detail");
 }
 
-/* ---------- wishlist/cart actions ---------- */
 function addToWishlist(id) {
-  for (let i = 0; i < wishlist.length; i++) {
-    if (wishlist[i] === id) {
-      updateCounts();
-      renderWishlist();
-      return;
-    }
+  if (wishlist.indexOf(id) !== -1) {
+    updateCounts();
+    renderWishlist();
+    return;
   }
   wishlist.push(id);
   saveData();
@@ -387,78 +351,61 @@ function addToWishlist(id) {
 }
 
 function removeFromWishlist(id) {
-  const temp = [];
-  for (let i = 0; i < wishlist.length; i++) {
-    if (wishlist[i] !== id) temp.push(wishlist[i]);
-  }
-  wishlist = temp;
+  wishlist = wishlist.filter(function (x) { return x !== id; });
   saveData();
   updateCounts();
   renderWishlist();
 }
 
 function addToCart(id, qty) {
-  for (let i = 0; i < cart.length; i++) {
-    if (cart[i].id === id) {
-      cart[i].qty += qty;
-      saveData();
-      updateCounts();
-      renderCart();
-      return;
-    }
-  }
-  cart.push({ id: id, qty: qty });
+  const item = cart.find(function (x) { return x.id === id; });
+  if (item) item.qty += qty;
+  else cart.push({ id: id, qty: qty });
+
   saveData();
   updateCounts();
   renderCart();
 }
 
 function removeFromCart(id) {
-  const temp = [];
-  for (let i = 0; i < cart.length; i++) {
-    if (cart[i].id !== id) temp.push(cart[i]);
-  }
-  cart = temp;
+  cart = cart.filter(function (x) { return x.id !== id; });
   saveData();
   updateCounts();
   renderCart();
 }
 
 function changeQty(id, delta) {
-  for (let i = 0; i < cart.length; i++) {
-    if (cart[i].id === id) {
-      cart[i].qty += delta;
-      if (cart[i].qty < 1) cart[i].qty = 1;
-      break;
-    }
-  }
+  const item = cart.find(function (x) { return x.id === id; });
+  if (!item) return;
+
+  item.qty += delta;
+  if (item.qty < 1) item.qty = 1;
+
   saveData();
   updateCounts();
   renderCart();
 }
 
-/* ---------- wishlist table ---------- */
 function renderWishlist() {
   const tbody = byId("wishlist_rows");
+
   if (wishlist.length === 0) {
     tbody.innerHTML = '<tr><td colspan="3">Wishlist is empty.</td></tr>';
     return;
   }
 
-  let html = "";
-  for (let i = 0; i < wishlist.length; i++) {
-    const g = findGame(wishlist[i]);
-    if (!g) continue;
-
-    html += "<tr>";
-    html += "<td>" + g.name + "</td>";
-    html += "<td>$" + fmt(g.price) + "</td>";
-    html += '<td><button type="button" class="w_move" data-id="' + g.id + '">Move to Cart</button> ';
-    html += '<button type="button" class="w_remove" data-id="' + g.id + '">Remove</button></td>';
-    html += "</tr>";
-  }
-
-  tbody.innerHTML = html;
+  tbody.innerHTML = wishlist.map(function (id) {
+    const g = findGame(id);
+    if (!g) return "";
+    return (
+      "<tr>" +
+        "<td>" + g.name + "</td>" +
+        "<td>$" + fmt(g.price) + "</td>" +
+        '<td><button type="button" class="w_move" data-id="' + g.id + '">Move to Cart</button> ' +
+        '<button type="button" class="w_remove" data-id="' + g.id + '">Remove</button></td>' +
+      "</tr>"
+    );
+  }).join("");
 
   const moveBtns = tbody.getElementsByClassName("w_move");
   for (let i = 0; i < moveBtns.length; i++) {
@@ -477,9 +424,9 @@ function renderWishlist() {
   }
 }
 
-/* ---------- cart table + totals ---------- */
 function renderCart() {
   const tbody = byId("cart_rows");
+
   if (cart.length === 0) {
     tbody.innerHTML = '<tr><td colspan="5">Cart is empty.</td></tr>';
     updateTotals(0);
@@ -487,28 +434,26 @@ function renderCart() {
   }
 
   let subtotal = 0;
-  let html = "";
 
-  for (let i = 0; i < cart.length; i++) {
-    const item = cart[i];
+  tbody.innerHTML = cart.map(function (item) {
     const g = findGame(item.id);
-    if (!g) continue;
+    if (!g) return "";
 
     const line = g.price * item.qty;
     subtotal += line;
 
-    html += "<tr>";
-    html += "<td>" + g.name + "</td>";
-    html += "<td>$" + fmt(g.price) + "</td>";
-    html += '<td><button type="button" class="c_minus" data-id="' + g.id + '">-</button> ';
-    html += '<span class="qty_value">' + item.qty + "</span> ";
-    html += '<button type="button" class="c_plus" data-id="' + g.id + '">+</button></td>';
-    html += "<td>$" + fmt(line) + "</td>";
-    html += '<td><button type="button" class="c_remove" data-id="' + g.id + '">Remove</button></td>';
-    html += "</tr>";
-  }
-
-  tbody.innerHTML = html;
+    return (
+      "<tr>" +
+        "<td>" + g.name + "</td>" +
+        "<td>$" + fmt(g.price) + "</td>" +
+        '<td><button type="button" class="c_minus" data-id="' + g.id + '">-</button> ' +
+        '<span class="qty_value">' + item.qty + "</span> " +
+        '<button type="button" class="c_plus" data-id="' + g.id + '">+</button></td>' +
+        "<td>$" + fmt(line) + "</td>" +
+        '<td><button type="button" class="c_remove" data-id="' + g.id + '">Remove</button></td>' +
+      "</tr>"
+    );
+  }).join("");
 
   const minus = tbody.getElementsByClassName("c_minus");
   for (let i = 0; i < minus.length; i++) {
@@ -543,7 +488,6 @@ function updateTotals(subtotal) {
   byId("total_value").innerHTML = fmt(total);
 }
 
-/* ---------- simple validation ---------- */
 function validEmail(e) {
   const at = e.indexOf("@");
   const dot = e.lastIndexOf(".");
@@ -553,15 +497,9 @@ function validEmail(e) {
   return true;
 }
 
-function setErr(id, msg) {
-  byId(id).innerHTML = msg;
-}
+function setErr(id, msg) { byId(id).innerHTML = msg; }
+function clearErr(id) { byId(id).innerHTML = ""; }
 
-function clearErr(id) {
-  byId(id).innerHTML = "";
-}
-
-/* newsletter */
 function newsletterSubmit() {
   const email = byId("newsletter_email").value.trim();
   if (!validEmail(email)) {
@@ -573,7 +511,6 @@ function newsletterSubmit() {
   byId("newsletter_email").value = "";
 }
 
-/* contact */
 function contactSubmit() {
   const email = byId("contact_email").value.trim();
   const msg = byId("contact_message").value.trim();
@@ -581,10 +518,10 @@ function contactSubmit() {
   let ok = true;
 
   if (!validEmail(email)) { setErr("err_contact_email", "Valid email required."); ok = false; }
-  else { clearErr("err_contact_email"); }
+  else clearErr("err_contact_email");
 
   if (msg === "") { setErr("err_contact_message", "Message required."); ok = false; }
-  else { clearErr("err_contact_message"); }
+  else clearErr("err_contact_message");
 
   if (ok) {
     alert("Message sent! (demo)");
@@ -593,7 +530,6 @@ function contactSubmit() {
   }
 }
 
-/* checkout + receipt */
 function orderNumber() {
   const d = new Date();
   const y = d.getFullYear();
@@ -620,7 +556,8 @@ function checkoutValid() {
   const cvv = byId("pay_cvv").value.trim();
   const email = byId("pay_email").value.trim();
 
-  if (name === "") { setErr("err_pay_name", "Required."); ok = false; } else clearErr("err_pay_name");
+  if (name === "") { setErr("err_pay_name", "Required."); ok = false; }
+  else clearErr("err_pay_name");
 
   if (card.length !== 16) { setErr("err_pay_card", "16 digits required."); ok = false; }
   else {
@@ -644,10 +581,9 @@ function checkoutValid() {
       setErr("err_pay_exp", "Invalid year.");
       ok = false;
     } else {
-      // Check if expiry is in the past
       const now = new Date();
-      const currentMonth = now.getMonth() + 1; // 0-based
-      const currentYear = now.getFullYear() % 100; // last 2 digits
+      const currentMonth = now.getMonth() + 1;
+      const currentYear = now.getFullYear() % 100;
 
       if (year < currentYear || (year === currentYear && month < currentMonth)) {
         setErr("err_pay_exp", "Card has expired.");
@@ -675,23 +611,23 @@ function buildReceipt(email) {
   byId("receipt_email").innerHTML = email;
 
   let subtotal = 0;
-  let html = "";
 
-  for (let i = 0; i < cart.length; i++) {
-    const item = cart[i];
+  const html = cart.map(function (item) {
     const g = findGame(item.id);
-    if (!g) continue;
+    if (!g) return "";
 
     const line = g.price * item.qty;
     subtotal += line;
 
-    html += "<tr>";
-    html += "<td>" + g.name + "</td>";
-    html += "<td>$" + fmt(g.price) + "</td>";
-    html += "<td>" + item.qty + "</td>";
-    html += "<td>$" + fmt(line) + "</td>";
-    html += "</tr>";
-  }
+    return (
+      "<tr>" +
+        "<td>" + g.name + "</td>" +
+        "<td>$" + fmt(g.price) + "</td>" +
+        "<td>" + item.qty + "</td>" +
+        "<td>$" + fmt(line) + "</td>" +
+      "</tr>"
+    );
+  }).join("");
 
   byId("receipt_rows").innerHTML = html;
 
@@ -714,7 +650,6 @@ function placeOrder() {
     const email = byId("pay_email").value.trim();
     buildReceipt(email);
 
-    // clear cart after purchase
     cart = [];
     saveData();
     updateCounts();
@@ -724,32 +659,25 @@ function placeOrder() {
   }, 1000);
 }
 
-/* ---------- wiring ---------- */
 function setup() {
   loadData();
   updateCounts();
 
-  // nav
   byId("nav_home").addEventListener("click", function (e) { e.preventDefault(); show("page_home"); });
   byId("nav_games").addEventListener("click", function (e) { e.preventDefault(); show("page_games"); renderGames(); });
   byId("nav_about").addEventListener("click", function (e) { e.preventDefault(); show("page_about"); });
   byId("nav_wishlist").addEventListener("click", function (e) { e.preventDefault(); show("page_wishlist"); renderWishlist(); });
   byId("nav_cart").addEventListener("click", function (e) { e.preventDefault(); show("page_cart"); renderCart(); });
 
-  // carousel
   function nextSlide() {
     carouselIndex++;
-    if (carouselIndex >= recommended.length) {
-      carouselIndex = 0;
-    }
+    if (carouselIndex >= recommended.length) carouselIndex = 0;
     showCarousel();
   }
 
   function prevSlide() {
     carouselIndex--;
-    if (carouselIndex < 0) {
-      carouselIndex = recommended.length - 1;
-    }
+    if (carouselIndex < 0) carouselIndex = recommended.length - 1;
     showCarousel();
   }
 
@@ -762,12 +690,12 @@ function setup() {
 
   byId("btn_carousel_prev").addEventListener("click", function () {
     prevSlide();
-    startCarouselAuto(); // reset timer
+    startCarouselAuto();
   });
 
   byId("btn_carousel_next").addEventListener("click", function () {
     nextSlide();
-    startCarouselAuto(); // reset timer
+    startCarouselAuto();
   });
 
   byId("btn_carousel_view_details").addEventListener("click", function () {
@@ -782,7 +710,6 @@ function setup() {
     addToWishlist(recommended[carouselIndex]);
   });
 
-  // games controls
   byId("btn_search").addEventListener("click", function () { renderGames(); });
   byId("btn_apply_sort").addEventListener("click", function () { renderGames(); });
   byId("filter_category").addEventListener("change", function () { renderGames(); });
@@ -801,7 +728,6 @@ function setup() {
     renderGames();
   });
 
-  // detail buttons
   byId("btn_detail_add_cart").addEventListener("click", function () {
     if (detailId !== null) addToCart(detailId, 1);
   });
@@ -815,12 +741,10 @@ function setup() {
     renderGames();
   });
 
-  // cart -> checkout
   byId("btn_cart_to_checkout").addEventListener("click", function () {
     show("page_checkout");
   });
 
-  // receipt buttons
   byId("btn_continue_shopping").addEventListener("click", function () {
     show("page_home");
   });
@@ -829,7 +753,6 @@ function setup() {
     window.print();
   });
 
-  // forms
   byId("btn_newsletter_subscribe").addEventListener("click", function () {
     newsletterSubmit();
   });
@@ -842,7 +765,6 @@ function setup() {
     placeOrder();
   });
 
-  // first load
   show("page_home");
   showCarousel();
   renderRecommended();
@@ -850,10 +772,10 @@ function setup() {
   renderCart();
   startCarouselAuto();
 
-  document.getElementById("filter_form").addEventListener("submit", function(event) {
-  event.preventDefault();
-  renderGames();
-});
+  document.getElementById("filter_form").addEventListener("submit", function (event) {
+    event.preventDefault();
+    renderGames();
+  });
 }
 
 document.addEventListener("DOMContentLoaded", setup);
