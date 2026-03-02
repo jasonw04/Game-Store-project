@@ -1,6 +1,7 @@
 html, body { height: 100%; }
 * { box-sizing: border-box; }
 
+//BODY STYLE
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
@@ -9,7 +10,7 @@ body {
   line-height: 1.35;
 }
 
-/* header */
+//HEADER STYLE
 #site_header {
   position: sticky;
   top: 0;
@@ -23,6 +24,7 @@ body {
   padding: 10px 16px;
 }
 
+//TITLE
 #site_title {
   margin: 0;
   font-size: 18px;
@@ -30,7 +32,7 @@ body {
   letter-spacing: 0.3px;
 }
 
-/* nav */
+//NAV
 #main_nav { margin: 0; }
 
 #nav_list {
@@ -59,7 +61,7 @@ body {
   color: #fff;
 }
 
-/* badges */
+//Wishlist and Cart Badges
 #wishlist_count, #cart_count {
   display: inline-block;
   min-width: 22px;
@@ -72,14 +74,14 @@ body {
   border: 1px solid rgba(59,130,246,0.30);
 }
 
-/* layout */
+//LAYOUT
 #main_content {
   max-width: 1200px;
   margin: 0 auto;
   padding: 16px;
 }
 
-/* pages */
+//PAGES STYLE
 .page {
   background: #fff;
   border: 1px solid #e5e7eb;
@@ -91,19 +93,21 @@ body {
 
 .hidden { display: none; }
 
+//HEADER 2
 h2 {
   margin: 0 0 12px 0;
   font-size: 22px;
   font-weight: 900;
 }
 
+//HEADER 3
 h3 {
   margin: 14px 0 10px 0;
   font-size: 15px;
   font-weight: 900;
 }
 
-/* form */
+//FORM
 input, select {
   width: 280px;
   max-width: 100%;
@@ -120,7 +124,7 @@ input:focus, select:focus {
   box-shadow: 0 0 0 4px rgba(59,130,246,0.12);
 }
 
-/* buttons */
+//BUTTONS
 button {
   border: 1px solid #cbd5e1;
   background: #fff;
@@ -133,7 +137,7 @@ button {
 
 button:hover { background: #f1f5f9; }
 
-/* hero */
+//HERO CAROUSEL
 #hero_carousel {
   background: #0b0f14;
   color: #fff;
@@ -185,7 +189,7 @@ button:hover { background: #f1f5f9; }
 
 #hero_carousel button:hover { background: rgba(255,255,255,0.16); }
 
-/* recommended */
+//RECOMMENDED GAMES
 #recommended_section { margin-top: 24px; }
 
 #recommended_section h3 {
@@ -247,7 +251,7 @@ button:hover { background: #f1f5f9; }
   border: 1px solid rgba(255,255,255,0.12);
 }
 
-/* controls */
+//CONTROLS
 #games_controls {
   background: #0f172a;
   color: #e5e7eb;
@@ -273,7 +277,7 @@ button:hover { background: #f1f5f9; }
 
 #games_controls button:hover { background: rgba(255,255,255,0.16); }
 
-/* cards */
+//GAME CARDS
 .game_card {
   border: 1px solid #e5e7eb;
   border-radius: 14px;
@@ -304,7 +308,7 @@ button:hover { background: #f1f5f9; }
   background: #f8fafc;
 }
 
-/* grid */
+//GAME GRID LIST
 #games_list.grid_view {
   display: grid;
   grid-template-columns: repeat(4, minmax(220px, 1fr));
@@ -313,7 +317,7 @@ button:hover { background: #f1f5f9; }
 
 #games_list.grid_view .game_card { margin-bottom: 0; }
 
-/* list */
+//GAME LIST
 #games_list.list_view .game_card {
   display: grid;
   grid-template-columns: 220px 1fr;
@@ -323,7 +327,7 @@ button:hover { background: #f1f5f9; }
 
 #games_list.list_view .card_img { height: 150px; }
 
-/* buttons */
+//GAME CARD BUTTONS
 .game_card button {
   width: auto;
   margin-top: 8px;
@@ -332,7 +336,7 @@ button:hover { background: #f1f5f9; }
   border-radius: 10px;
 }
 
-/* actions */
+//ADD TO CART INTERACTIONS
 .btn_add_cart, #btn_carousel_add_cart, #btn_detail_add_cart, .w_move {
   border-color: rgba(34,197,94,0.40) !important;
   background: rgba(34,197,94,0.16) !important;
@@ -351,7 +355,7 @@ button:hover { background: #f1f5f9; }
   background: rgba(59,130,246,0.20) !important;
 }
 
-/* detail */
+//DETAIL STYLE
 #detail_title {
   margin: 0 0 8px 0;
   font-size: 22px;
@@ -396,7 +400,7 @@ button:hover { background: #f1f5f9; }
   border-color: rgba(59,130,246,0.45);
 }
 
-/* tables */
+//TABLES STYLE
 table {
   width: 100%;
   border-collapse: collapse;
@@ -430,7 +434,7 @@ tbody tr:hover { background: #eef2ff; }
   font-weight: 900;
 }
 
-/* errors */
+//ERROR
 .error_text {
   display: inline-block;
   margin-left: 8px;
@@ -439,7 +443,7 @@ tbody tr:hover { background: #eef2ff; }
   font-weight: 800;
 }
 
-/* footer */
+//FOOTER
 #site_footer {
   background: #0b0f14;
   color: #e5e7eb;
@@ -478,7 +482,7 @@ tbody tr:hover { background: #eef2ff; }
   color: #9ca3af;
 }
 
-/* print */
+//PRINT LAYOUT
 @media print {
   #site_header,
   #site_footer,
