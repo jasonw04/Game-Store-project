@@ -382,21 +382,3 @@ tbody tr:hover { background: #eef2ff; }
   font-size: 12px;
   color: #9ca3af;
 }
-
-/* =========================
-   Desktop responsiveness
-   ========================= */
-@media screen and (max-width: 980px) {
-  #recommended_list .game_card {
-    width: 48%;
-    margin-right: 4%;
-  }
-  #recommended_list .game_card:nth-child(2n) { margin-right: 0; }
-  #recommended_list .game_card:nth-child(3n) { margin-right: 4%; }
-}
-
-@media screen and (max-width: 650px) {
-  #nav_list li { display: block; margin: 6px 0; }
-  #recommended_list .game_card { width: 100%; margin-right: 0; }
-  #games_list.grid_view .game_card { width: 100%; margin-right: 0; }
-}
